@@ -1,0 +1,21 @@
+page-timeline {
+ion-textarea{
+ user-select: auto !important;
+}
+ion-scroll[scrollX] {
+
+white-space: nowrap;
+
+height: 120px;
+
+overflow: hidden;
+
+.scroll-item {
+background-color:#ffffff;
+display: inline-block;
+overflow:hide;
+margin-bottom:10px;
+font-size:12px;
+}
+}
+}

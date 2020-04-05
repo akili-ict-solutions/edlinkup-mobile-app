@@ -1,0 +1,72 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--ion-header>
+
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header-->
+
+
+
+<ion-content class="show-log"   painput style="background-color:#7CB9F2; background-image:url('assets/img/bg.jpg');  ">
+<div style="position:fixed; left:0; padding:30px;  top:0; height:100%; width:100%;"> 
+ 
+ <!--img src="http://edlinkup.co.tz/images/bg.jpg"   style="opacity:0.2;"  /-->
+ </div> 
+<div padding style="padding-top:50%;">
+  <ion-list >
+<ion-item  style="border:2px solid #FFFFFF; 
+	border-radius:10px;
+	height: 15px;
+	width: 98%;
+	color:#ffffff;
+	background-color:transparent;">
+    <ion-input type="text" [(ngModel)]="username" style="" placeholder="Phone Number" ></ion-input>
+  </ion-item>
+   <br/>
+
+  <ion-item style="border:2px solid #FFFFFF;
+	border-radius:10px;
+	height: 15px;
+	color:#ffffff;
+	background-color:transparent;
+	width: 98%;">
+    <ion-input type="password" [(ngModel)]="password" placeholder="Password" ></ion-input>
+  </ion-item>
+
+    </ion-list>
+	</div>
+	
+  <div padding>
+   <ion-grid>
+  
+  <ion-row>
+    <ion-col col-6>
+	<button   ion-button full round (click)="onLogin(username,password)" >Login</button>
+    </ion-col>
+	<ion-col col-6> 
+	<button ion-button full round (click)="onSignup()" style="color:#fff;" color="secondary" >Sign Up</button>
+   </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+<ion-grid>
+  
+  <ion-row>
+    <ion-col col-12>
+	<ion-item style="border-radius:10px;background-color:#45A9EA;color:#ffffff;font-size:13px; text-align:center;" (click)="onSignup2()">Forgotten password?</ion-item>
+	
+	 </ion-col>
+	
+  </ion-row>
+</ion-grid>
+   </div>
+
+</ion-content>

@@ -1,0 +1,32 @@
+page-detail {
+    .item-md.item-block .item-inner {
+        // padding-right: 8px;
+        // border-bottom: 1px solid #dedede;
+        border-bottom: unset;
+    }
+
+    p {
+        font-family: vernada,tahoma,arial, sans-serif;
+        font-size:18px !important;
+        color:#28292A !important;
+    }
+    
+    h1 {
+        font-family: vernada,tahoma,arial, sans-serif;
+        font-size:18px !important;
+        font-weight:bold;
+        color:#28292A !important;
+    }
+
+    ion-list {
+        margin: 0 !important;
+        border-bottom: 1.3px solid #dedede;
+        padding-bottom: 1em !important;
+    }
+
+    ion-list-header {
+        text-transform: uppercase !important;
+        background-color: #b6b6b676 !important;
+        font-size: 1.2em !important;
+    }
+}

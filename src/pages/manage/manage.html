@@ -1,0 +1,1492 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title> {{title}} </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-color:#ffffff;">
+<div [ngSwitch]="title">
+    <ion-list *ngSwitchCase="'Timetable'">
+
+
+<ion-segment color="segment" [(ngModel)]="segments" style="background-color:#fff;">
+      <ion-segment-button value="Mon">
+        Mon
+      </ion-segment-button>
+      <ion-segment-button value="Tue">
+        Tue
+      </ion-segment-button>
+	  <ion-segment-button value="Wed">
+        Wed
+      </ion-segment-button>
+	  <ion-segment-button value="Thur">
+        Thur
+      </ion-segment-button>
+	  <ion-segment-button value="Fri">
+        Fri
+      </ion-segment-button>
+	  <ion-segment-button value="Sat">
+        Sat
+      </ion-segment-button>
+    </ion-segment>
+
+	<div [ngSwitch]="segments">
+    <ion-list *ngSwitchCase="'Mon'">
+	<ion-grid>
+	    <ion-row  *ngFor="let item of Timetable"  style="padding:6px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+    <ion-col col-6 style="padding:5px;color:#4E6B65; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.mon_subj}}<br/><br/>{{item.mon_teacher}}</ion-col>
+	<ion-col col-6 style="padding:5px;color:#4E6B65; text-align:right; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.time_start}} - {{item.time_end}}</ion-col>
+  </ion-row>
+	</ion-grid>
+
+	</ion-list>
+	 <ion-list *ngSwitchCase="'Tue'">
+  <ion-grid>
+	<ion-row  *ngFor="let item of Timetable"  style="padding:6px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+    <ion-col col-6 style="padding:5px;color:#4E6B65; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.tue_subj}}<br/><br/>{{item.tue_teacher}}</ion-col>
+	<ion-col col-6 style="padding:5px;color:#4E6B65; text-align:right; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.time_start}} - {{item.time_end}}</ion-col>
+  </ion-row>
+	</ion-grid>
+
+
+	</ion-list>
+	 <ion-list *ngSwitchCase="'Wed'">
+
+	  <ion-grid>
+	    <ion-row  *ngFor="let item of Timetable"  style="padding:6px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+    <ion-col col-6 style="padding:5px;color:#4E6B65; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.wed_subj}}<br/><br/>{{item.wed_teacher}}</ion-col>
+	<ion-col col-6 style="padding:5px;color:#4E6B65; text-align:right; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.time_start}} - {{item.time_end}}</ion-col>
+  </ion-row>
+	</ion-grid>
+
+	</ion-list>
+
+	 <ion-list *ngSwitchCase="'Thur'">
+
+	  <ion-grid>
+	    <ion-row  *ngFor="let item of Timetable"  style="padding:6px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+    <ion-col col-6 style="padding:5px;color:#4E6B65; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.thu_subj}}<br/><br/>{{item.thu_teacher}}</ion-col>
+	<ion-col col-6 style="padding:5px;color:#4E6B65; text-align:right; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.time_start}} - {{item.time_end}}</ion-col>
+  </ion-row>
+	</ion-grid>
+
+	</ion-list>
+
+	 <ion-list *ngSwitchCase="'Fri'">
+	 <ion-grid>
+	    <ion-row  *ngFor="let item of Timetable"  style="padding:6px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+    <ion-col col-6 style="padding:5px;color:#4E6B65; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.fri_subj}}<br/><br/>{{item.fri_teacher}}</ion-col>
+	<ion-col col-6 style="padding:5px;color:#4E6B65; text-align:right; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.time_start}} - {{item.time_end}}</ion-col>
+  </ion-row>
+	</ion-grid>
+	</ion-list>
+
+	 <ion-list *ngSwitchCase="'Sat'">
+	 <ion-grid>
+	    <ion-row  *ngFor="let item of Timetable"  style="padding:6px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+    <ion-col col-6 style="padding:5px;color:#4E6B65; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.sat_subj}}<br/><br/>{{item.sat_teacher}}</ion-col>
+	<ion-col col-6 style="padding:5px;color:#4E6B65; text-align:right; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.time_start}} - {{item.time_end}}</ion-col>
+  </ion-row>
+	</ion-grid>
+	</ion-list>
+
+	</div>
+
+	</ion-list>
+
+
+    <ion-list *ngSwitchCase="'Classes_Report'">
+        <ion-item *ngFor="let item of classesreport"    >
+            <ion-icon name="ios-list-outline" item-start></ion-icon> {{item.cls}} {{item.sbj}}
+            <ion-list>
+                <ion-item *ngFor="let y of item.exams" style="color:#4E6B65;padding:4px 4px 4px 30px;">
+                    {{y.examname}}<br/><i><small style="color:#9897A0;">{{y.termname}}</small></i>
+                    <button ion-button outline item-end (click)="Classes_Report(y.examname+' '+item.sbj,y)"
+                          style="text-transform:capitalize; border:solid thin #3D6960 !important; color:#3D6960 !important;">
+                        view
+                    </button>
+                </ion-item>
+            </ion-list>
+        </ion-item>
+    </ion-list>
+
+
+
+
+
+
+
+
+    <ion-list *ngSwitchCase="'ClassTeacher'">
+        <ion-item *ngFor="let item of classesList" (click)="callAttendance(item)">
+            <ion-icon name="ios-list-outline" item-start></ion-icon>
+
+            {{ item.classname }} {{ item.stream }}
+
+            <ion-badge item-end>{{ item.totalstudent }}</ion-badge>
+        </ion-item>
+    </ion-list>
+
+  <ion-list *ngSwitchCase="'NoticeBoard'">
+
+	<div  *ngFor="let item of NoticeBoard "   style="margin-left:0;margin-right:0; margin-bottom:8px; background-color:#eee; padding-left:0; padding-bottom:9px;  padding-right:0;">
+       <div style=" background-color:#fff;border:#A6B0B2; padding-bottom:5px;">
+  <ion-item >
+
+      <h4 style="text-transform:uppercase;">{{item.title}}</h4>
+
+  </ion-item>
+
+
+    <p *ngIf="item.description!=''"   style="padding: 5px; text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;" [innerHTML]="item.description"></p>
+
+ <img  *ngIf="item.file!=''" [src]="imgaddlogo+item.file"  style="background-color: #FFFFFF;width:100%;">
+
+  <br/><span style=" color:#E15821;font-size: 12px;padding-top: 5px;"><i>{{item.date|date}}</i></span>
+
+
+</div>
+</div>
+
+	</ion-list>
+
+
+	<ion-list *ngSwitchCase="'Staff'">
+
+	<div *ngFor="let item of Staff">
+
+        <ion-item >
+          <ion-thumbnail item-left style="height:10px;">
+            <img [src]="imgaddlogo+userphoto(item.photo)">
+          </ion-thumbnail>
+		  <h2>{{item.first_name}} {{item.last_name}}</h2>
+    <h3>Position: {{item.position}}</h3>
+    <p>Phone: {{item.telephone}}</p>
+		</ion-item>
+		 </div  >
+
+	</ion-list>
+
+
+
+	<ion-list *ngSwitchCase="'Duties'">
+
+	<div *ngFor="let item of Staff" >
+
+        <ion-item *ngIf="item.duty=='duty'">
+          <ion-thumbnail item-left style="height:10px;">
+            <img [src]="imgaddlogo+userphoto(item.photo)">
+          </ion-thumbnail>
+		  <h2>{{item.first_name}} {{item.last_name}}</h2>
+		  <h3>Phone: {{item.telephone}}</h3>
+    <h3>Start Date: {{item.startdate|date}}</h3>
+	<h3>End Date: {{item.enddate|date}}</h3>
+		</ion-item>
+		 </div  >
+
+	</ion-list>
+
+    <ion-list *ngSwitchCase="'My_Student'">
+        <p style="padding-left: 10px; font-size: 18px;">{{ className+' '+streamName }}</p>
+
+        <ion-grid>
+            <ion-list reorder="true">
+                <ion-item *ngFor="let item of Teacher_Subject let i=index" (click)="viewStudent(item.teachersubject, item.id, item)">
+                    <ion-avatar item-start>
+                        <img [src]="imgaddlogo+userphoto(item.photo)" (click)="getImage(item.id, i)">
+                    </ion-avatar>
+
+                    <h2 style="text-transform: capitalize">{{ item.name }}</h2>
+                </ion-item>
+            </ion-list>
+        </ion-grid>
+    </ion-list>
+
+
+
+
+	<ion-list *ngSwitchCase="'Post_Result'">
+	<button ion-button style="float:right;" (click)="savemarks()">Submit</button>
+     <p style="padding-left:10px; font-size:18px;">{{className+' '+streamName+' '+subjectName}}</p>
+	 <ion-item>
+    <ion-label style="color:#000 !important">Select Exam</ion-label>
+    <ion-select [(ngModel)]="exam" (ionChange)='get_ExamScores()'>
+      <ion-option *ngFor="let item of exams let i=index;" value="{{item.id}}">{{item.exam}}</ion-option>
+
+    </ion-select>
+  </ion-item>
+    <ion-item>
+    <ion-label style="color:#000 !important">Select Term</ion-label>
+    <ion-select [(ngModel)]="term"   (ionChange)='get_ExamScores()'>
+      <ion-option *ngFor="let item of terms let i=index;" value="{{item.id}}">{{item.name}}</ion-option>
+
+    </ion-select>
+  </ion-item>
+
+
+  <ion-item *ngFor="let item of Teacher_Subject let i=index">
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.photo)">
+    </ion-avatar>
+    <ion-label stacked style="text-transform:capitalize;margin-bottom:2px;font-size:18px;color:#000 !important">{{item.name}}</ion-label>
+    <ion-input type="number" placeholder="Marks"   [(ngModel)]="marks[i]"  (keypress)="max100(marks[i],i)"
+	type="number"   ></ion-input>
+
+  </ion-item>
+
+	</ion-list>
+	<ion-list *ngSwitchCase="'Teacher'">
+	<h4 style="font-size:14px; padding-left:10px">{{className}} {{streamName}} {{subjectName}} </h4>
+	<ion-segment  [(ngModel)]="segments_teacher" style="background-color:#DCE0E3; color:#000;">
+      <ion-segment-button value="students" style="color:#28292A;">
+        Students
+      </ion-segment-button>
+      <div *ngIf="position!=teacher">
+        <ion-segment-button value="Insert" style="color:#28292A;">
+            Insert Results
+        </ion-segment-button>
+      </div>
+
+	  <ion-segment-button value="diary" (click)="teachersubjectdiary('diary')" style="color:#28292A;">
+       Diary
+      </ion-segment-button>
+	  <ion-segment-button value="homework" (click)="teachersubjectdiary('homework')" style="color:#28292A;">
+      Homework
+      </ion-segment-button>
+	  <ion-segment-button value="resource" (click)="teachersubjectdiary('resource')" style="color:#28292A;">
+      Resources
+      </ion-segment-button>
+
+    </ion-segment>
+
+	<div [ngSwitch]="segments_teacher" style="margin:0">
+	<ion-list *ngSwitchCase="'students'">
+
+	<ion-grid>
+	 <ion-list reorder="true">
+  <ion-item *ngFor="let item of Teacher_Subject " (click)="viewStudent(item.name,item.id,item)">
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.photo)">
+    </ion-avatar>
+    <h2 style="text-transform:capitalize">{{item.name}} </h2>
+  </ion-item>
+</ion-list>
+
+	</ion-grid>
+	</ion-list>
+
+
+	<ion-list *ngSwitchCase="'Insert'">
+<button ion-button style="float:right;" (click)="savemarks()">Submit</button>
+
+	 <ion-item>
+    <ion-label style="color:#000 !important">Select Exam</ion-label>
+    <ion-select [(ngModel)]="exam" (ionChange)='get_ExamScores()'>
+      <ion-option *ngFor="let item of exams let i=index;" value="{{item.id}}">{{item.exam}}</ion-option>
+
+    </ion-select>
+  </ion-item>
+    <ion-item>
+    <ion-label style="color:#000 !important">Select Term</ion-label>
+    <ion-select [(ngModel)]="term"   (ionChange)='get_ExamScores()'>
+      <ion-option *ngFor="let item of terms let i=index;" value="{{item.id}}">{{item.name}}</ion-option>
+
+    </ion-select>
+  </ion-item>
+<ion-list>
+
+</ion-list>
+	<ion-grid>
+	 <ion-list>
+  <ion-item *ngFor="let item of Teacher_Subject let i=index">
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.photo)">
+    </ion-avatar>
+    <ion-label stacked style="text-transform:capitalize;margin-bottom:2px;font-size:18px;color:#000 !important">{{item.name}}</ion-label>
+    <ion-input type="number" placeholder="Marks"   [(ngModel)]="marks[i]"  (keypress)="max100(marks[i],i)"
+	type="number"   ></ion-input>
+
+  </ion-item>
+</ion-list>
+
+	</ion-grid>
+	</ion-list>
+
+
+	<ion-list *ngSwitchCase="'diary'" style="margin:0">
+	<p style="text-transform:capitalize;margin:20px">POST ON  {{className}} {{streamName}} {{subjectName}}  DIARY</p>
+	<ion-grid>
+	<ion-textarea [(ngModel)]="post" style="border:#ccc solid 1px; ;padding:5px; border-radius:15px; min-height:60px ;" type="text" (input)="adjustTextarea($event);"></ion-textarea>
+
+  </ion-grid>
+
+  <ion-item>
+  <button (click)="getImage()" ion-button outline item-end icon-start>
+      <ion-icon name="image"></ion-icon>
+    </button>
+    <button ion-button (click)="uploadClassDiary(post,'diary')" outline item-end >
+      Post
+    </button>
+  </ion-item>
+
+  <img src="{{imageURI}}" *ngIf="imageFileName" width="100%"/>
+
+  	  <div  *ngFor="let item of getTdiary let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:5px; padding-bottom:3px;  padding-right:5px;  background-color:#ccc;">
+       <div style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;">{{item.teachername}}</h2>
+       <p>Teacher</p>
+
+  </ion-item>
+
+
+    <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+
+ <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+
+
+		 <ion-row style="margin:0;padding:0;" color="dark">
+         <ion-col  center>
+
+          </ion-col>
+		 <ion-col center>
+
+          </ion-col>
+
+          <ion-col center text-center>
+            <button color="dark"  ion-button  clear small>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > {{item.date|date}}</div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+
+
+
+
+
+
+	</ion-list>
+	<ion-list *ngSwitchCase="'homework'">
+	<p style="text-transform:capitalize;margin:20px">POST ON  {{className}} {{streamName}} {{subjectName}}  HOMEWORK</p>
+	<ion-grid>
+	<ion-textarea [(ngModel)]="post" style="border:#ccc solid 1px; ;padding:10px; border-radius:20px; min-height:60px ;" type="text" (input)="adjustTextarea($event);"></ion-textarea>
+
+  </ion-grid>
+
+
+
+  <ion-item>
+  <button (click)="getImage()" ion-button outline item-end icon-start>
+      <ion-icon name="image"></ion-icon>
+    </button>
+    <button ion-button (click)="uploadClassDiary(post,'homework')" outline item-end >
+      Post
+    </button>
+  </ion-item>
+  <img src="{{imageURI}}" *ngIf="imageFileName" width="100%"/>
+
+
+	<div  *ngFor="let item of getTdiary let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:5px; padding-bottom:3px;  padding-right:5px;">
+       <div style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;">{{item.teachername}}</h2>
+       <p>Teacher</p>
+
+  </ion-item>
+
+    <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+
+ <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+
+
+		 <ion-row style="margin:0;padding:0;" color="dark">
+         <ion-col  center>
+
+          </ion-col>
+		 <ion-col center>
+
+          </ion-col>
+
+          <ion-col center text-center>
+            <button color="dark"  ion-button  clear small>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > {{item.date|date}}</div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+
+
+
+</ion-list>
+
+	<ion-list *ngSwitchCase="'resource'">
+
+	<p style="text-transform:capitalize;margin:20px">POST ON  {{className}} {{streamName}} {{subjectName}}  RESOURCE</p>
+	<ion-grid>
+	<ion-textarea [(ngModel)]="post" style="border:#ccc solid 1px; ;padding:10px; border-radius:20px; min-height:60px ;" type="text" (input)="adjustTextarea($event);"></ion-textarea>
+
+  </ion-grid>
+  <ion-item>
+  <button (click)="getImage()" ion-button outline item-end icon-start>
+      <ion-icon name="image"></ion-icon>
+    </button>
+    <button ion-button (click)="uploadClassDiary(post,'resource')" outline item-end >
+      Post
+    </button>
+  </ion-item>
+  <img src="{{imageURI}}" *ngIf="imageFileName" width="100%"/>
+
+
+
+
+
+
+ 	  <div  *ngFor="let item of getTdiary let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:5px; padding-bottom:3px;  padding-right:5px;">
+       <div style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;">{{item.teachername}}</h2>
+     <p>Teacher</p>
+
+  </ion-item>
+
+
+    <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+
+ <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+
+
+		 <ion-row style="margin:0;padding:0;" color="dark">
+         <ion-col  center>
+
+          </ion-col>
+		 <ion-col center>
+
+          </ion-col>
+
+          <ion-col center text-center>
+            <button color="dark"  ion-button  clear small>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > {{item.date|date}}</div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+
+
+
+	</ion-list>
+	</div>
+	</ion-list>
+
+
+
+	   <ion-list *ngSwitchCase="'Teacher_Timetable'">
+
+
+<ion-segment color="segment" [(ngModel)]="segments" style="background-color:#fff;">
+      <ion-segment-button value="Mon">
+        Mon
+      </ion-segment-button>
+      <ion-segment-button value="Tue">
+        Tue
+      </ion-segment-button>
+	  <ion-segment-button value="Wed">
+        Wed
+      </ion-segment-button>
+	  <ion-segment-button value="Thur">
+        Thur
+      </ion-segment-button>
+	  <ion-segment-button value="Fri">
+        Fri
+      </ion-segment-button>
+	  <ion-segment-button value="Sat">
+        Sat
+      </ion-segment-button>
+    </ion-segment>
+
+	<div [ngSwitch]="segments">
+    <ion-list *ngSwitchCase="'Mon'">
+	<ion-grid *ngFor="let item of Teacher_Timetable" >
+
+	    <ion-row *ngIf="item.mon_subj!=''"  style="padding:6px 0 4px 2px ; border-bottom:#ccc 2px solid;" (click)="TeacherSubjects(item.mon_classid,item.mon_streamid,item.mon_subjid,item.mon_class,item.mon_stream,item.mon_subj)">
+            <ion-col col-6 style="padding:5px;color:#5191B8; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.mon_subj}} <br/><br/> {{null_(item.mon_class)+' '+null_(item.mon_stream)}}</ion-col>
+	         <ion-col col-6 style="padding:5px;color:#4E6B65; text-align:right; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.mon_start}} - {{item.mon_end}}</ion-col>
+        </ion-row>
+	</ion-grid>
+	</ion-list>
+
+	<ion-list *ngSwitchCase="'Tue'">
+
+	<ion-grid *ngFor="let item of Teacher_Timetable" >
+
+	    <ion-row  style="padding:6px 0 4px 2px ; border-bottom:#ccc 2px solid;" (click)="TeacherSubjects(item.tue_classid,item.tue_streamid,item.tue_subjid,item.tue_class,item.tue_stream,item.tue_subj)">
+            <ion-col col-6 style="padding:5px;color:#5191B8; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.tue_subj}} <br/><br/> {{null_(item.tue_class)+' '+null_(item.tue_stream)}}</ion-col>
+	         <ion-col col-6 style="padding:5px;color:#4E6B65; text-align:right; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.tue_start}} - {{item.tue_end}}</ion-col>
+        </ion-row>
+	</ion-grid>
+	</ion-list>
+
+	<ion-list *ngSwitchCase="'Wed'">
+
+	<ion-grid *ngFor="let item of Teacher_Timetable" >
+
+	    <ion-row *ngIf="item.wed_subj!=''"   style="padding:6px 0 4px 2px ; border-bottom:#ccc 2px solid;" (click)="TeacherSubjects(item.wed_classid,item.wed_streamid,item.wed_subjid,item.wed_class,item.wed_stream,item.wed_subj)">
+            <ion-col col-6 style="padding:5px;color:#5191B8; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.wed_subj}} <br/><br/> {{null_(item.wed_class)+' '+null_(item.wed_stream)}}</ion-col>
+	         <ion-col col-6 style="padding:5px;color:#4E6B65; text-align:right; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.wed_start}} - {{item.wed_end}}</ion-col>
+        </ion-row>
+	</ion-grid>
+	</ion-list>
+
+	<ion-list *ngSwitchCase="'Thur'">
+
+	<ion-grid *ngFor="let item of Teacher_Timetable" >
+
+	    <ion-row *ngIf="item.thu_subj!=''"  style="padding:6px 0 4px 2px ; border-bottom:#ccc 2px solid;" (click)="TeacherSubjects(item.thu_classid,item.thu_streamid,item.thu_subjid,item.thu_class,item.thu_stream,item.thu_subj)">
+            <ion-col col-6 style="padding:5px;color:#5191B8; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.thu_subj}} <br/><br/> {{null_(item.thu_class)+' '+null_(item.thu_stream)}}</ion-col>
+	         <ion-col col-6 style="padding:5px;color:#4E6B65; text-align:right; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.thu_start}} - {{item.thu_end}}</ion-col>
+        </ion-row>
+	</ion-grid>
+	</ion-list>
+
+	<ion-list *ngSwitchCase="'Fri'">
+
+	<ion-grid *ngFor="let item of Teacher_Timetable" >
+
+	    <ion-row *ngIf="item.fri_subj!=''"  style="padding:6px 0 4px 2px ; border-bottom:#ccc 2px solid;" (click)="TeacherSubjects(item.fri_classid,item.fri_streamid,item.fri_subjid,item.fri_class,item.fri_stream,item.fri_subj)">
+            <ion-col col-6 style="padding:5px;color:#5191B8; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.fri_subj}} <br/><br/> {{null_(item.fri_class)+' '+null_(item.fri_stream)}}</ion-col>
+	         <ion-col col-6 style="padding:5px;color:#4E6B65; text-align:right; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.fri_start}} - {{item.fri_end}}</ion-col>
+        </ion-row>
+	</ion-grid>
+	</ion-list>
+	<ion-list *ngSwitchCase="'Sat'">
+
+	<ion-grid *ngFor="let item of Teacher_Timetable" >
+
+	    <ion-row *ngIf="item.sat_subj!=''"    style="padding:6px 0 4px 2px ; border-bottom:#ccc 2px solid;" (click)="TeacherSubjects(item.sat_classid,item.sat_streamid,item.sat_subjid,item.sat_class,item.sat_stream,item.sat_subj)">
+            <ion-col col-6 style="padding:5px;color:#5191B8; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.sat_subj}} <br/><br/> {{null_(item.sat_class)+' '+null_(item.sat_stream)}}</ion-col>
+	         <ion-col col-6 style="padding:5px;color:#4E6B65; text-align:right; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;text-transform: uppercase;">{{item.sat_start}} - {{item.sat_end}}</ion-col>
+        </ion-row>
+	</ion-grid>
+
+
+	</ion-list>
+
+	</div>
+
+	</ion-list>
+
+<ion-list *ngSwitchCase="'Attendance'"  style="padding:2px;background-color:#fff;">
+    <ion-grid>
+        <ion-row>
+            <ion-col col-3 style="padding:2px;font:bolder;text-align:left;color:#4E6B65; font-size:15px;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">Month</ion-col>
+            <ion-col col-3 style="padding:2px; text-align:center;color:#4E6B65; font-size:15px;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">Present</ion-col>
+            <ion-col col-3 style="padding:2px; text-align:center;color:#4E6B65; font-size:15px;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">Absent</ion-col>
+            <ion-col col-3 style="padding:2px; text-align:center; color:#4E6B65; font-size:15px;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">Days</ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row *ngFor="let item of Attandance.attandanced let i = index" style="padding:4px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+            <ion-col col-3 style="padding:4px; text-align:left;color:#4E6B65; font:bold;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.name}}</ion-col>
+            <ion-col col-3 style="padding:2px; text-align:center;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.attend[32].day}}</ion-col>
+            <ion-col col-3 style="padding:2px; text-align:center;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.attend[31].day}}</ion-col>
+            <ion-col col-3 style="padding:2px; text-align:center;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.attend[33].day}}</ion-col>
+        </ion-row>
+        <ion-row  style="padding:4px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+            <ion-col col-3 style="padding:4px; text-align:center;">TOTAL</ion-col>
+            <ion-col col-3 style="padding:2px; text-align:center;">{{Attandance.attandanced[0].present}}</ion-col>
+            <ion-col col-3 style="padding:2px; text-align:center;">{{Attandance.attandanced[0].absent}}</ion-col>
+            <ion-col col-3 style="padding:2px; text-align:center;">{{Attandance.attandanced[0].total}}</ion-col>
+        </ion-row>
+    </ion-grid>
+    <!--ion-item *ngFor="let item of Attendance" >
+        <h2 style="font-size:18px"></h2>
+        <h3 style="font-size:18px">Present {{item.attend[31].day}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Absent {{item.attend[32].day}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Total {{item.attend[33].day}}</h3>
+    </ion-item-->
+</ion-list>
+
+<ion-list *ngSwitchCase="'Subjects'" style="background-color:#fff">
+    <br/>
+    <div *ngFor="let item of Subjects">
+        <ion-item (click)="openManager(item.name,item.idmember,'student')">
+            <ion-thumbnail item-left style="height:10px;">
+                <img [src]="imgaddlogo+userphoto(item.photo)">
+            </ion-thumbnail>
+            <h2>{{item.subject}}</h2>
+            <h3>Teacher: {{item.teachersubject}}</h3>
+            <p>Phone: {{item.phone}}</p>
+        </ion-item>
+    </div>
+</ion-list>
+
+<ion-list *ngSwitchCase="'Reports'"style="margin:0;padding:0;">
+    <div *ngFor="let item of Reports" style="margin:0;padding:0;">
+        <ion-item color="light" style="margin:0;padding:4px 4px 4px 30px;color:#4E6B65;
+              background-color:#DCE0E3; font-weight:700;">{{item.darasa}} {{item.year}} - EXAMS</ion-item>
+        <ion-list  *ngFor="let x of item.term" style="padding:4px;color:#4E6B65;padding:4px 4px 4px 30px;font-weight:bold;" > {{x.name}}
+            <ion-row *ngFor="let y of x.result" >
+			<ion-item   *ngIf="y.score.length!=0"  style="color:#4E6B65;padding:4px 4px 4px 30px;" >
+                {{y.examname}}
+                <button ion-button outline item-end (click)="openExam(y.examname,y.score)" style="text-transform:capitalize; border:solid thin #3D6960 !important; color:#3D6960 !important;" >
+                    view
+                </button>
+
+            </ion-item>
+			</ion-row>
+        </ion-list>
+    </div>
+</ion-list>
+
+<ion-list *ngSwitchCase="'Messages'"style="margin:0;padding:0;">
+    <ion-item *ngFor="let item of Messages.messages let i=index" (click)="posts(item)">
+        <ion-avatar item-start>
+            <img [src]="imgaddlogo+userphoto(Messages.schoolprofile.Profile.logo)" style="background-color: #FFFFFF;">
+        </ion-avatar>
+        <h2 style="text-transform:capitalize">
+            {{item.user}} - {{item.position}} <ion-badge item-end color="danger" *ngIf="item.numb!=0">{{item.numb}}</ion-badge>
+            <i><small style="color:#9897A0;float:right;">{{item.date|date}}</small></i>
+        </h2>
+        <p *ngIf="item.message!=''" style="text-align:left; padding:3px; margin:3px;font-weight: normal;font-family: Arial, Helvetica, sans-serif;" [innerHTML]="item.message"></p>
+    </ion-item>
+</ion-list>
+
+
+
+<div *ngSwitchCase="'Student_Message'"style="margin:0;padding:10px;">
+
+
+               <div style=" background-color:#fff;border:#A6B0B2; padding-bottom:5px;">
+  <ion-item >
+
+      <h4 style="text-transform:uppercase;">{{comments.class}} {{comments.stream}} {{comments.year}}</h4>
+
+  </ion-item>
+
+
+    <p   style="padding: 5px; text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;" [innerHTML]="comments.message"></p>
+
+
+ <br/><span style=" color:#666666;font-size: 12px;padding-top: 5px;">Posted by : <i>{{comments.user}} - {{comments.position}}</i></span>
+
+  <br/><span style=" color:#666666;font-size: 12px;padding-top: 5px;"><i>{{comments.date|date}}</i></span>
+
+
+</div>
+
+
+</div>
+
+
+<ion-list *ngSwitchCase="'Gallery'">
+	 <ion-grid style="padding:2px;">
+ <ion-row>
+ <ion-col col-4 style="padding:1px;cursor:pointer;"  >
+   <div style="list-style:none; display:inline; ">
+					 <div class="col-4"
+                     style="background-image: url('assets/img/ica-slidebox-img-4.png');  height:90px;  background-position: center center; background-size:cover;">
+
+				   <div style="height:90; text-align:center; color:#FFFFFF; width:100%;"  >
+				   <br/>
+
+							</div>
+
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+
+	</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;cursor:pointer;"  >
+   <div style="list-style:none; display:inline; ">
+					 <div class="col-4"
+                     style="background-image: url('assets/img/ica-slidebox-img-4.png');  height:90px;  background-position: center center; background-size:cover;">
+
+				   <div style="height:90; text-align:center; color:#FFFFFF; width:100%;"  >
+				   <br/>
+
+							</div>
+
+				   <div  width="100%" height="100%">  </div>
+
+				   </div>
+
+	</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;cursor:pointer;"  >
+   <div style="list-style:none; display:inline; ">
+					 <div class="col-4"
+                     style="background-image: url('assets/img/ica-slidebox-img-4.png');  height:90px;  background-position: center center; background-size:cover;">
+
+				   <div style="height:90; text-align:center; color:#FFFFFF; width:100%;"  >
+				   <br/>
+
+							</div>
+
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+
+	</div>
+	</ion-col>
+ </ion-row>
+ <ion-row>
+ <ion-col col-4 style="padding:1px;cursor:pointer;"  >
+   <div style="list-style:none; display:inline; ">
+					 <div class="col-4"
+                     style="background-image: url('assets/img/ica-slidebox-img-4.png');  height:90px;  background-position: center center; background-size:cover;">
+
+				   <div style="height:90; text-align:center; color:#FFFFFF; width:100%;"  >
+				   <br/>
+
+							</div>
+
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+
+	</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;cursor:pointer;"  >
+   <div style="list-style:none; display:inline; ">
+					 <div class="col-4"
+                     style="background-image: url('assets/img/ica-slidebox-img-4.png');  height:90px;  background-position: center center; background-size:cover;">
+
+				   <div style="height:90; text-align:center; color:#FFFFFF; width:100%;"  >
+				   <br/>
+
+							</div>
+
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+
+	</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;cursor:pointer;"  >
+   <div style="list-style:none; display:inline; ">
+					 <div class="col-4"
+                     style="background-image: url('assets/img/ica-slidebox-img-4.png');  height:90px;  background-position: center center; background-size:cover;">
+
+				   <div style="height:90; text-align:center; color:#FFFFFF; width:100%;"  >
+				   <br/>
+
+							</div>
+
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+
+	</div>
+	</ion-col>
+ </ion-row>
+ <ion-row>
+ <ion-col col-4 style="padding:1px;cursor:pointer;"  >
+   <div style="list-style:none; display:inline; ">
+					 <div class="col-4"
+                     style="background-image: url('assets/img/ica-slidebox-img-4.png');  height:90px;  background-position: center center; background-size:cover;">
+
+				   <div style="height:90; text-align:center; color:#FFFFFF; width:100%;"  >
+				   <br/>
+
+							</div>
+
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+
+	</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;cursor:pointer;"  >
+   <div style="list-style:none; display:inline; ">
+					 <div class="col-4"
+                     style="background-image: url('assets/img/ica-slidebox-img-4.png');  height:90px;  background-position: center center; background-size:cover;">
+
+				   <div style="height:90; text-align:center; color:#FFFFFF; width:100%;"  >
+				   <br/>
+
+							</div>
+
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+
+	</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;cursor:pointer;"  >
+   <div style="list-style:none; display:inline; ">
+					 <div class="col-4"
+                     style="background-image: url('assets/img/ica-slidebox-img-4.png');  height:90px;  background-position: center center; background-size:cover;">
+                    <div style="height:90; text-align:center; color:#FFFFFF; width:100%;"  >
+				   <br/>
+				   </div>
+
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+
+	</div>
+	</ion-col>
+ </ion-row>
+ </ion-grid>
+
+	</ion-list>
+	<ion-list *ngSwitchCase="'Profile'">
+	<ion-item style=" padding:15px; margin:0;
+  font:  14px 'abel', Helvetica, sans-serif;
+  color: #999;
+  text-decoration: none; border:none;
+  text-align: left;
+  text-indent: 0;">
+        <ion-thumbnail item-left>
+          <img [src]="imgaddlogo+userphoto(Profile.photo)">
+        </ion-thumbnail>
+		<p>
+
+		<b > {{Profile.first_name}}  {{Profile.last_name}}</b><br/>
+		{{Profile.darasa}} {{Profile.stream}}
+		</p>
+		<!--button color="segment" ion-button><ion-icon color="spm" ios="ios-list-box-outline" md="md-list-box"></ion-icon></button>
+		<button color="segment" ion-button><ion-icon color="spm" ios="ios-calendar-outline" md="md-calendar"></ion-icon></button>
+        <button color="segment" ion-button><ion-icon color="spm" ios="ios-create-outline" md="md-create"></ion-icon></button-->
+
+		  </ion-item>
+		 <ion-grid style="padding-left:10px;">
+		  <ion-row style="padding:4px 0 4px 2px ;background-color:#fff; ">
+            <ion-col col-6 style="padding:2px;font:bolder;color:#4E6B65; font-size:15px; ">Nationality</ion-col>
+	        <ion-col col-6 style="padding:2px; text-align:left;color:#4E6B65; font-size:15px; ">{{Profile.nationality}}</ion-col>
+          </ion-row>
+		  <ion-row style="padding:4px 0 4px 2px ;background-color:#fff; ">
+            <ion-col col-6 style="padding:2px;font:bolder;color:#4E6B65; font-size:15px; ">Day / Boarding</ion-col>
+	        <ion-col col-6 style="padding:2px; text-align:left;color:#4E6B65; font-size:15px; ">{{Profile.boarding_day}}</ion-col>
+          </ion-row>
+		  <ion-row style="padding:4px 0 4px 2px ;background-color:#fff; ">
+            <ion-col col-6 style="padding:2px;font:bolder;color:#4E6B65; font-size:15px; ">Gender</ion-col>
+	        <ion-col col-6 style="padding:2px; text-align:left;color:#4E6B65; font-size:15px; ">{{Profile.gender}}</ion-col>
+          </ion-row>
+		  <ion-row style="padding:4px 0 4px 2px ;background-color:#fff; ">
+            <ion-col col-6 style="padding:2px;font:bolder;color:#4E6B65; font-size:15px; ">Alegies</ion-col>
+	        <ion-col col-6 style="padding:2px; text-align:left;color:#4E6B65; font-size:15px; ">{{Profile.remark}}</ion-col>
+          </ion-row>
+
+         </ion-grid>
+
+
+    <ion-item color="light" style="margin:0;padding:4px 4px 4px 30px;color:#4E6B65; background-color:#DCE0E3; font-weight:700;">Parents Information</ion-item>
+        <ion-item *ngFor="let item of member">
+          <ion-thumbnail item-left style="height:10px;">
+            <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF;">
+          </ion-thumbnail>
+          <h2 style="text-transform: uppercase;">{{item.firstName}} {{item.lastName}}</h2>
+          <p >{{item.phone}}
+
+	   <br/><span style="font-weight:600;color:#444141;text-transform: uppercase;">{{item.relation}}</span>
+        </p>
+		</ion-item>
+
+
+		<!--ion-item >
+          <ion-thumbnail item-left style="height:10px;">
+            <img [src]="imgaddlogo+userphoto(member[1].member.logo)" style="background-color: #FFFFFF;">
+          </ion-thumbnail>
+          <h2>{{member[1].member.first_name}}</h2>
+          <p >{{member[1].member.telephone}}
+       <br/>{{member[1].member.physical_address}}
+	   <br/><span style="font-weight:600;color:#15DC2D;">{{member[1].member.relation}}</span>
+        </p>
+		</ion-item>
+
+		<ion-item >
+          <ion-thumbnail item-left style="height:10px;">
+            <img [src]="imgaddlogo+userphoto(member[2].member.logo)" style="background-color: #FFFFFF;">
+          </ion-thumbnail>
+          <h2>{{member[2].member.first_name}}</h2>
+          <p >{{member[2].member.telephone}}
+       <br/>{{member[2].member.physical_address}}
+	   <br/><span style="font-weight:600;color:#15DC2D;">{{member[2].member.relation}}</span>
+        </p>
+		</ion-item-->
+
+	</ion-list>
+
+
+
+	<!---FEE---->
+	<ion-list *ngSwitchCase="'Fee'">
+	<ion-segment color="segment" [(ngModel)]="Feepanel" style="background-color:#fff;">
+      <ion-segment-button value="Account">
+        Account Status
+      </ion-segment-button>
+      <ion-segment-button value="Payment">
+        Payment Records
+      </ion-segment-button>
+	  <ion-segment-button value="Confirm">
+        Confirm Payments
+      </ion-segment-button>
+
+    </ion-segment>
+
+	<div [ngSwitch]="Feepanel">
+    <ion-list *ngSwitchCase="'Account'">
+	<div style="padding:10px; margin:0;">
+	<ion-item color="segment" >
+    <h2 style="color:#000;font-weight:bold;">Cash Balance: </h2>
+	<h2 style="color:#000;font-weight:bold;">Outstanding Balance: {{Data.profile.balance}}  </h2>
+  </ion-item>
+	</div>
+
+
+
+	<ion-grid>
+  <ion-row>
+    <ion-col col-3 style="padding:2px;font:bolder;color:#4E6B65; font-size:15px; ">Item</ion-col>
+	<ion-col col-3 style="padding:2px; text-align:center;color:#4E6B65; font-size:15px; ">Required</ion-col>
+	<ion-col col-3 style="padding:2px; text-align:center;color:#4E6B65; font-size:15px; ">Paid</ion-col>
+	<ion-col col-3 style="padding:2px; text-align:center; color:#4E6B65; font-size:15px; ">Balance</ion-col>
+  </ion-row>
+  </ion-grid>
+
+<ion-grid>
+  <ion-row *ngFor="let item of Required" style="padding:4px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+    <ion-col col-3 style="padding:4px;color:#4E6B65; font:bold;">{{item.payname}}</ion-col>
+	<ion-col col-3 style="padding:2px; text-align:center;">{{item.payamount}}</ion-col>
+	<ion-col col-3 style="padding:2px;  text-align:center;">{{item.cost}}</ion-col>
+	<ion-col col-3 style="padding:2px;  text-align:center;">{{item.balance}}</ion-col>
+  </ion-row>
+
+</ion-grid>
+
+
+
+
+
+	<!--ion-list *ngFor="let item of Required">
+  <ion-item>
+    <h2>{{item.payname}}</h2>
+	<h3>{{item.year}} {{item.term}}</h3>
+	<h3>Required : {{item.payamount}}</h3>
+    <h3>Paid:&nbsp;&nbsp;&nbsp; {{item.cost}}</h3>
+	<h3>Balance: {{item.balance}}</h3>
+  </ion-item>
+</ion-list-->
+</ion-list>
+<ion-list *ngSwitchCase="'Payment'">
+
+<ion-card *ngFor="let item of Payment">
+  <ion-item>
+  <h3 color="segment">{{item.darasa}} {{item.stream}} - {{item.pay[0].year}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date: {{item.pay[0].date}}</h3>
+  <hr/>
+    <h3>The sum of Shillings: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.totalword}}</h3>
+	<h3>Receipt No: {{item.pay[0].serial}}</h3>
+	<p>Being payment of:</p>
+	<p *ngFor="let x of item.pay">
+	{{x.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{{x.cost}}<br/>
+
+	</p>
+	<p>Total:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{item.total}}</p>
+	<p>Payment Method:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{item.method}}</p>
+
+  </ion-item>
+</ion-card>
+</ion-list>
+<ion-list *ngSwitchCase="'Confirm'">
+<ion-list *ngFor="let item of Payment">
+  <ion-item>
+    <h2>Confirm</h2>
+
+  </ion-item>
+</ion-list>
+</ion-list>
+</div>
+
+
+	</ion-list>
+	<ion-list *ngSwitchCase="'Diary'" style="background-color:#E7E2E1; ">
+
+	<div *ngIf="position=='teacher'">
+<ion-grid>
+	<ion-textarea placeholder="Write your post" [(ngModel)]="post" style="border:#ccc solid 1px; background-color: #fff;padding:5px; border-radius:15px; min-height:60px ;" type="text" (input)="adjustTextarea($event);"></ion-textarea>
+
+  </ion-grid>
+  <ion-item>
+  <button (click)="getImage()" ion-button outline item-end icon-start>
+      <ion-icon name="image"></ion-icon>
+    </button>
+    <button ion-button (click)="upload(post,panel)" outline item-end >
+      Post
+    </button>
+  </ion-item>
+  <img src="{{imageURI}}" *ngIf="imageFileName" width="100%"/>
+
+	  <div  *ngFor="let item of getdiary let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:5px; padding-bottom:3px;  padding-right:5px;">
+       <div *ngIf="item.idUser==idMember" style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;">{{item.profile}}</h2>
+       <p style="text-transform:capitalize;">{{item.content}}</p>
+		<ion-icon  ios="ios-more" md="md-more" (click)="editPost(i,item)" item-end></ion-icon>
+
+  </ion-item>
+
+
+    <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+
+ <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+
+
+		 <ion-row style="margin:0;padding:0;" color="dark">
+         <ion-col  center>
+            <button color="dark"   ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;" (click)="opentComment(item.id)">Reply {{item.comments}}</div>
+            </button>
+          </ion-col>
+		 <ion-col center>
+
+          </ion-col>
+
+          <ion-col center text-center>
+            <button color="dark"  ion-button  clear small>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > {{item.date|date}}</div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+
+  </div>
+  	<div *ngIf="position=='student'">
+     <div  *ngFor="let item of getdiary let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:5px; padding-bottom:3px;  padding-right:5px;">
+       <div  style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;">{{item.profile}}</h2>
+       <p style="text-transform:capitalize;">{{item.content}}</p>
+
+  </ion-item>
+
+
+    <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+
+ <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+
+
+		 <ion-row style="margin:0;padding:0;" color="dark">
+         <ion-col  center>
+            <button color="dark"   ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;" (click)="opentComment(item.id)">Reply  {{item.comments}}</div>
+            </button>
+          </ion-col>
+		 <ion-col center>
+
+          </ion-col>
+
+          <ion-col center text-center>
+            <button color="dark"  ion-button  clear small>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > {{item.date|date}}</div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+</div>
+
+
+
+    </ion-list>
+
+
+	<ion-list *ngSwitchCase="'Homeworks'"  style="background-color:#E7E2E1; ">
+
+	<div *ngIf="position=='teacher'">
+<ion-grid>
+	<ion-textarea placeholder="Write your post" [(ngModel)]="post" style="border:#ccc solid 1px; background-color: #fff;padding:5px; border-radius:15px; min-height:60px ;" type="text" (input)="adjustTextarea($event);"></ion-textarea>
+
+  </ion-grid>
+  <ion-item>
+  <button (click)="getImage()" ion-button outline item-end icon-start>
+      <ion-icon name="image"></ion-icon>
+    </button>
+    <button ion-button (click)="upload(post,panel)" outline item-end >
+      Post
+    </button>
+  </ion-item>
+  <img src="{{imageURI}}" *ngIf="imageFileName" width="100%"/>
+
+	  <div  *ngFor="let item of getdiary let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:5px; padding-bottom:3px;  padding-right:5px;">
+       <div *ngIf="item.idUser==idMember" style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;">{{item.profile}}</h2>
+       <p style="text-transform:capitalize;">{{item.content}}</p>
+		<ion-icon  ios="ios-more" md="md-more" (click)="editPost(i,item)" item-end></ion-icon>
+
+  </ion-item>
+
+
+    <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+
+ <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+
+
+		 <ion-row style="margin:0;padding:0;" color="dark">
+         <ion-col  center>
+            <button color="dark"   ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;" (click)="opentComment(item.id)">Reply {{item.comments}}</div>
+            </button>
+          </ion-col>
+		 <ion-col center>
+
+          </ion-col>
+
+          <ion-col center text-center>
+            <button color="dark"  ion-button  clear small>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > {{item.date|date}}</div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+
+  </div>
+  	<div *ngIf="position=='student'">
+     <div  *ngFor="let item of getdiary let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:5px; padding-bottom:3px;  padding-right:5px;">
+       <div  style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;">{{item.profile}}</h2>
+       <p style="text-transform:capitalize;">{{item.content}}</p>
+
+  </ion-item>
+
+
+    <p *ngIf="item.name!=''" style="text-align: left; padding: 3px; margin:3px;" [innerHTML]="item.name"></p>
+
+    <ion-item>
+        <img item-start *ngIf="item.photo!=''" [src]="img_pdf" style="background-color: #FFFFFF;" width="100" height="100">
+
+        <button color="dark" ion-button icon-left clear small item-end (click)="getPDF(imgadd+item.photo)" [ngStyle]="{ 'background-color':'#0084b4', 'color':'#ffffff', 'padding.em': '0 1', 'height.em':'2.8' }">Download</button>
+    </ion-item>
+
+
+		 <ion-row style="margin:0;padding:0;" color="dark">
+
+            <ion-col center text-center>
+              <button color="dark"  ion-button  clear small>
+                <div style="font-size:12px;text-transform:capitalize !important;"  > {{item.date|date}}</div>
+              </button>
+            </ion-col>
+         <ion-col  center>
+            <!-- <button color="dark"   ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;" (click)="opentComment(item.id)">Reply {{item.comments}}</div>
+            </button> -->
+          </ion-col>
+		 <ion-col center>
+
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+</div>
+
+
+	</ion-list>
+
+
+
+
+	<!-- <ion-list *ngSwitchCase="'Documents'"  style="background-color:#E7E2E1; ">
+
+	<div *ngIf="position=='teacher'">
+<ion-grid>
+	<ion-textarea placeholder="Write your post" [(ngModel)]="post" style="border:#ccc solid 1px; background-color: #fff;padding:5px; border-radius:15px; min-height:60px ;" type="text" (input)="adjustTextarea($event);"></ion-textarea>
+
+  </ion-grid>
+  <ion-item>
+  <button (click)="getImage()" ion-button outline item-end icon-start>
+      <ion-icon name="image"></ion-icon>
+    </button>
+    <button ion-button (click)="upload(post,panel)" outline item-end >
+      Post
+    </button>
+  </ion-item>
+  <img src="{{imageURI}}" *ngIf="imageFileName" width="100%"/>
+
+	  <div  *ngFor="let item of getdiary let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:5px; padding-bottom:3px;  padding-right:5px;">
+       <div *ngIf="item.idUser==idMember" style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;">{{item.profile}}</h2>
+       <p style="text-transform:capitalize;">{{item.content}}</p>
+		<ion-icon  ios="ios-more" md="md-more" (click)="editPost(i,item)" item-end></ion-icon>
+
+  </ion-item>
+
+
+    <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+
+ <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+
+
+		 <ion-row style="margin:0;padding:0;" color="dark">
+         <ion-col  center>
+            <button color="dark"   ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;" (click)="opentComment(item.id)">Reply {{item.comments}}</div>
+            </button>
+          </ion-col>
+		 <ion-col center>
+
+          </ion-col>
+
+          <ion-col center text-center>
+            <button color="dark"  ion-button  clear small>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > {{item.date|date}}</div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+
+  </div>
+  	<div *ngIf="position=='student'">
+     <div  *ngFor="let item of getdiary let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:5px; padding-bottom:3px;  padding-right:5px;">
+       <div  style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;">{{item.profile}}</h2>
+       <p style="text-transform:capitalize;">{{item.content}}</p>
+
+  </ion-item>
+
+
+    <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+
+ <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+
+
+		 <ion-row style="margin:0;padding:0;" color="dark">
+         <ion-col  center>
+            <button color="dark"   ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;" (click)="opentComment(item.id)">Reply {{item.comments}}</div>
+            </button>
+          </ion-col>
+		 <ion-col center>
+
+          </ion-col>
+
+          <ion-col center text-center>
+            <button color="dark"  ion-button  clear small>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > {{item.date|date}}</div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+</div>
+
+
+	</ion-list> -->
+
+
+
+
+	<ion-list *ngSwitchCase="'diary'" style="margin:0">
+	<!-- <p style="text-transform:capitalize;margin:20px">POST ON  {{className}} {{streamName}} {{subjectName}}  DIARY</p>
+	<ion-grid>
+	<ion-textarea [(ngModel)]="post" style="border:#ccc solid 1px; ;padding:5px; border-radius:15px; min-height:60px ;" type="text" (input)="adjustTextarea($event);"></ion-textarea>
+
+  </ion-grid>
+
+  <ion-item>
+  <button (click)="getImage()" ion-button outline item-end icon-start>
+      <ion-icon name="image"></ion-icon>
+    </button>
+    <button ion-button (click)="uploadClassDiary(post,'diary')" outline item-end >
+      Post
+    </button>
+  </ion-item>
+
+  <img src="{{imageURI}}" *ngIf="imageFileName" width="100%"/> -->
+
+  	  <div  *ngFor="let item of getTdiary let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:5px; padding-bottom:3px;  padding-right:5px;  background-color:#ccc;">
+       <div style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;">{{item.teachername}}</h2>
+       <p>Teacher</p>
+
+  </ion-item>
+
+
+    <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+
+ <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+
+
+		 <ion-row style="margin:0;padding:0;" color="dark">
+         <ion-col  center>
+
+          </ion-col>
+		 <ion-col center>
+
+          </ion-col>
+
+          <ion-col center text-center>
+            <button color="dark"  ion-button  clear small>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > {{item.date|date}}</div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+
+
+
+
+
+
+	</ion-list>
+	<ion-list *ngSwitchCase="'homework'">
+	<!-- <p style="text-transform:capitalize;margin:20px">POST ON  {{className}} {{streamName}} {{subjectName}}  HOMEWORK</p>
+	<ion-grid>
+	<ion-textarea [(ngModel)]="post" style="border:#ccc solid 1px; ;padding:10px; border-radius:20px; min-height:60px ;" type="text" (input)="adjustTextarea($event);"></ion-textarea>
+
+  </ion-grid>
+
+
+
+  <ion-item>
+  <button (click)="getImage()" ion-button outline item-end icon-start>
+      <ion-icon name="image"></ion-icon>
+    </button>
+    <button ion-button (click)="uploadClassDiary(post,'homework')" outline item-end >
+      Post
+    </button>
+  </ion-item>
+  <img src="{{imageURI}}" *ngIf="imageFileName" width="100%"/> -->
+
+
+	<div  *ngFor="let item of getTdiary let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:5px; padding-bottom:3px;  padding-right:5px;">
+       <div style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;">{{item.teachername}}</h2>
+       <p>Teacher</p>
+
+  </ion-item>
+
+    <p *ngIf="item.name!=''" style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+
+    <ion-item>
+        <img item-start *ngIf="item.photo!=''" [src]="img_pdf" style="background-color: #FFFFFF;" width="100" height="100">
+
+        <button color="dark" ion-button icon-left clear small item-end (click)="getPDF(imgadd+item.photo)" [ngStyle]="{ 'background-color':'#0084b4', 'color':'#ffffff', 'padding.em': '0 1', 'height.em':'2.8' }">View</button>
+    </ion-item>
+
+
+		 <ion-row style="margin:0;padding:0;" color="dark">
+
+          <ion-col center text-center>
+            <button color="dark"  ion-button  clear small>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > {{item.date|date}}</div>
+            </button>
+          </ion-col>
+
+         <ion-col  center>
+
+        </ion-col>
+       <ion-col center>
+
+        </ion-col>
+
+        </ion-row>
+</div>
+</div>
+
+
+
+</ion-list>
+
+        <ion-list *ngSwitchCase="'resource'">
+            <!-- <p style="text-transform: capitalize; margin: 20px">POST ON {{ className }} {{ streamName }} {{ subjectName }} RESOURCE</p>
+            
+            <ion-grid>
+                <ion-textarea [(ngModel)]="post" style="border:#ccc solid 1px; padding: 10px; border-radius: 20px; min-height: 60px;" type="text" (input)="adjustTextarea($event)"></ion-textarea>
+            </ion-grid>
+            
+            <ion-item>
+                <button (click)="getImage()" ion-button outline item-end icon-start>
+                    <ion-icon name="image"></ion-icon>
+                </button>
+                
+                <button ion-button (click)="uploadClassDiary(post, 'resource')" outline item-end>Post</button>
+            </ion-item>
+            
+            <img src="{{ imageURI }}" *ngIf="imageFileName" width="100%" /> -->
+
+            <div *ngFor="let item of getTdiary let i=index;" style="margin-left: 0; margin-right: 0; margin-bottom: 8px; padding-left: 5px; padding-bottom: 3px; padding-right: 5px;">
+                <div style="background-color: #ffffff; border: #A6B0B2;">
+                    <ion-item >
+                        <ion-avatar item-start>
+                            <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF;">
+                        </ion-avatar>
+                        
+                        <h2 (click)="openTimeline(item.profile, item.idProfile)" style="font-size: 12px; font-weight: 600 !important;">{{ item.teachername }}</h2>
+                        
+                        <p>Teacher</p>
+                    </ion-item>
+
+                    <p *ngIf="item.name!=''" style="text-align: left; padding: 3px; margin: 3px;" [innerHTML]="item.name"></p>
+
+                    <!-- <img *ngIf="item.photo!=''" [src]="imgadd+item.photo" style="background-color: #FFFFFF; width: 100%;"> -->
+
+                    <embed [src]="imgadd+item.photo" width="150" height="150" />
+
+                    <ion-row style="margin: 0; padding: 0;" color="dark">
+                        <ion-col center text-center>
+                            <button color="dark" ion-button  clear small>
+                                <div style="font-size: 12px; text-transform: capitalize !important;">{{ item.date|date }}</div>
+                            </button>
+                        </ion-col>
+                        
+                        <ion-col  center>
+
+                        </ion-col>
+                        
+                        <ion-col center>
+
+                        </ion-col>
+                    </ion-row>
+                </div>
+            </div>
+        </ion-list>
+	</div>
+</ion-content>

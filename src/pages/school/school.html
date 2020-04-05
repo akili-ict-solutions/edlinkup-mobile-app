@@ -1,0 +1,317 @@
+<!--
+  Generated template for the PostDetails page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar color="spm">
+	
+        <ion-title>{{title}}</ion-title>
+       
+    </ion-navbar>
+    <!--<ion-toolbar color="spm">-->
+        <!--<ion-buttons>-->
+            <!--<button ion-button icon-left (click)="presentActionSheet()">-->
+                <!--<ion-icon name="camera"></ion-icon>Select Image-->
+            <!--</button>-->
+            <!--<button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">-->
+                <!--<ion-icon name="cloud-upload"></ion-icon>Upload-->
+            <!--</button>-->
+        <!--</ion-buttons>-->
+    <!--</ion-toolbar>-->
+    <!--<ion-toolbar color="spm" no-border-top>-->
+    <!--<ion-segment color="mikumi" [(ngModel)]="segment">-->
+    <!--<ion-segment-button value="news" >-->
+    <!--&nbsp;-->
+    <!--</ion-segment-button>-->
+    <!--<ion-segment-button value="events" >-->
+    <!--&nbsp;-->
+    <!--</ion-segment-button>-->
+    <!--<ion-segment-button value="business" >-->
+    <!--&nbsp;-->
+    <!--</ion-segment-button>-->
+    <!--<ion-segment-button value="list">-->
+    <!--&nbsp;-->
+    <!--</ion-segment-button>-->
+    <!--</ion-segment>-->
+    <!--</ion-toolbar>-->
+</ion-header>
+
+
+<ion-content style="background-color:#eee;">
+<div [style.backgroundImage]="'url('+imgaddlogo+photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%">
+  </div>
+    <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+    <div style="background-color:#3D6960 ; width: 100%">
+    
+            <ion-item >
+			
+                <ion-avatar item-left >
+                    <img [src]="imgaddlogo+userphoto(logo)">
+                </ion-avatar>
+				
+                <h2>{{name}}</h2>
+				<p>{{location}}</p>
+				
+				
+                
+            </ion-item>
+
+    </div>
+ <ion-grid style="padding:2px;">
+
+
+
+<ion-row>
+	<ion-col col-4 style="padding:1px;" (click)="openTimeline('Profile', Profile.Profile)">
+		<div style="list-style:none; display:inline; ">
+			<div class="col-4" style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+				<div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+					<br/><ion-icon style="font-size:50px" ios="ios-home" md="md-home"></ion-icon><br/>           
+					Profile
+				</div>
+				<div  width="100%" height="100%">  </div>
+			</div>
+		</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;" (click)="openTimeline('Contacts',Profile.Contacts)">
+		<div style="list-style:none; display:inline; ">
+						 <div class="col-4"   
+						 style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+							
+					   <div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+					 <br/>
+					 <ion-icon   style="font-size:50px" ios="ios-call" md="md-call"></ion-icon>
+					 <br/>           
+	Contacts
+	</div>   
+					   
+					   <div  width="100%" height="100%">  </div>
+						</div>
+					
+		</div>
+		</ion-col>
+		
+ <ion-col col-4 style="padding:1px;" (click)="openTimeline('Teachers',Profile.Teachers)">
+		<div style="list-style:none; display:inline; ">
+						  <div class="col-4"   
+						  style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+							 
+						<div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+						<br/>
+								 <ion-icon  style="font-size:50px" ios="ios-people" md="md-people"></ion-icon><br/>
+							  Teachers
+								 </div>   
+						
+						<div  width="100%" height="100%">  </div>
+						 </div>
+					 
+		 </div>
+		 </ion-col>
+</ion-row>
+
+<ion-row>
+	<ion-col col-4 style="padding:1px;" (click)="openTimeline('Gallery',Profile.Gallery)">
+		<div style="list-style:none; display:inline; ">
+			<div class="col-4" style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+				<div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+				<br/>
+				<ion-icon  style="font-size:50px" ios="ios-images" md="md-images"></ion-icon><br/>
+				Gallery
+				</div>   
+				<div  width="100%" height="100%">  </div>
+			</div>
+		</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;" (click)="openTimeline('Services',Profile.Services)">
+	<div style="list-style:none; display:inline; ">
+	<div class="col-4"   
+	style=" background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+
+	<div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+	<br/>
+	<ion-icon style="font-size:50px" ios="ios-laptop" md="md-laptop"></ion-icon>
+	<br/>           
+	School Facilities
+	</div>   
+
+	<div  width="100%" height="100%">  </div>
+	</div>
+
+	</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;" (click)="openTimeline('Achievement',Profile.Achievement)">
+	<div style="list-style:none; display:inline; ">
+	<div class="col-4"   
+	style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+
+	<div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+	<br/>
+	<ion-icon style="font-size:50px" ios="ios-trophy" md="md-trophy"></ion-icon>
+	<br/>           
+	Achievement
+	</div>   
+
+	<div  width="100%" height="100%">  </div>
+	</div>
+
+	</div>
+	</ion-col>
+</ion-row>
+
+ <ion-row>
+ <ion-col col-4 style="padding:1px;" (click)="openTimeline('Calendar',Profile.Calendar)">
+   <div style="list-style:none; display:inline; ">
+					 <div class="col-4"   
+                     style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+                        
+				   <div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+				   <br/>
+                            <ion-icon  style="font-size:50px" ios="ios-calendar-outline" md="md-calendar"></ion-icon><br/>
+                         NECTA Results
+							</div>   
+				   
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+				
+	</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;" (click)="openTimeline('Download', Profile.Download)">
+	<div style="list-style:none; display:inline; ">
+					 <div class="col-4"   
+                     style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+                        
+				   <div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+                 <br/>
+				 <ion-icon   style="font-size:50px" ios="ios-download" md="md-download"></ion-icon>
+				 <br/>           
+Download
+</div>   
+				   
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+				
+	</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;" (click)="openTimeline('Notice Board',Profile.Notice)">
+	<div style="list-style:none; display:inline; ">
+					 <div class="col-4"   
+                     style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+                        
+				   <div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+                 <br/>
+				 	 <ion-icon   style="font-size:50px" ios="ios-clipboard" md="md-clipboard"></ion-icon>
+				 <br/>           
+Notice Board
+				 
+				 
+</div>   
+				   
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+				
+	</div>
+	</ion-col>
+ </ion-row>
+ 
+ 
+ <ion-row>
+	 
+	<ion-col col-4 style="padding:1px;" (click)="openTimeline('School_Events',profileid)">
+			<div style="list-style:none; display:inline; ">
+				<div class="col-4" style="background-color:#ffffff; height:90px; background-position: center center; background-size:cover;">
+					<div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+						<br/><ion-icon   style="font-size:50px" ios="ios-calendar" md="md-calendar"></ion-icon><br/>           
+						Events
+					</div>   
+					<div width="100%" height="100%"></div>
+				</div>
+			</div>
+		</ion-col>
+	<ion-col col-4 style="padding:1px;" (click)="openTimeline('School Needs',Profile.Needs)">
+	<div style="list-style:none; display:inline; ">
+					 <div class="col-4"   
+                     style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+                        
+				   <div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+                 <br/>
+				 <ion-icon   style="font-size:50px" ios="ios-filing" md="md-filing"></ion-icon>
+				 <br/>           
+School Needs
+</div>   
+				   
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+				
+	</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;" (click)="openTimeline('School Stat',Profile.SchoolStat)">
+	<div style="list-style:none; display:inline; ">
+					 <div class="col-4"   
+                     style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+                        
+				   <div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+                 <br/>
+				 	 <ion-icon   style="font-size:50px" ios="ios-stats" md="md-stats"></ion-icon>
+				 <br/>           
+School Stat.
+				 
+				 
+</div>   
+				   
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+				
+	</div>
+	</ion-col>
+ </ion-row>
+ 
+ 
+  <ion-row>
+		<ion-col col-4 style="padding:1px;background-color:#E8EBEE;" (click)="openTimeline('School_Job',profileid)">
+				<div style="list-style:none; display:inline; ">
+					<div class="col-4" style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+					<div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+						<br/><ion-icon  style="font-size:50px" ios="ios-alert-outline" md="md-alert"></ion-icon><br/>
+						Job Adverts
+					</div>   
+					<div  width="100%" height="100%">  </div>
+					</div>
+				</div>
+			</ion-col>
+	
+	<ion-col col-4 style="padding:1px;background-color:#E8EBEE;" (click)="openTimeline('School_Timeline',profileid)">
+		<div style="list-style:none; display:inline; ">
+			<div class="col-4" style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+			<div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+				<br/><ion-icon  style="font-size:50px" ios="ios-paper" md="md-paper"></ion-icon><br/>
+				Timeline
+			</div>   
+			<div  width="100%" height="100%">  </div>
+			</div>
+		</div>
+	</ion-col>
+	<ion-col col-4 style="padding:1px;" (click)="openTimeline('Donors',Profile.Donors)">
+	<div style="list-style:none; display:inline; ">
+					 <div class="col-4"   
+                     style="background-color:#ffffff;  height:90px;  background-position: center center; background-size:cover;">
+                        
+				   <div style="height:90; text-align:center; color:#3D6960; width:100%;"  >
+                 <br/>
+				 	 <ion-icon   style="font-size:50px" ios="ios-people" md="md-people"></ion-icon>
+				 <br/>           
+Donors
+				 
+				 
+</div>   
+				   
+				   <div  width="100%" height="100%">  </div>
+                    </div>
+				
+	</div>
+	</ion-col>
+ </ion-row>
+ 
+</ion-grid>
+</ion-content>

@@ -1,0 +1,33 @@
+page-student {
+ion-navbar {
+background:#FFFFFF !important;
+}
+h1 {
+font-family: vernada,tahoma,arial, sans-serif;
+font-size:18px !important;
+font-weight:bold;
+color:#28292A !important;
+}
+
+ #notification-button {            
+            position: relative;
+            width: 100px;
+            top:20px;
+            right: 6px;
+            overflow: visible!important;
+			font-size:50px;
+			text-align:center; 
+			color:#3D6960;
+        }
+
+
+   #notifications-badge {
+            background-color:transparent;
+            position: absolute;
+			width:20px;
+            top: -1px;
+            right:3px;
+            border-radius: 100%;
+        }
+
+}

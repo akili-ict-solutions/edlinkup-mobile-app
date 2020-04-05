@@ -1,0 +1,81 @@
+
+<ion-header >
+
+  <ion-navbar color="primary" >
+    <ion-title text-center>Security Question</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content  painput style="background-color:#7CB9F2;background-image:url('assets/img/bg.jpg');">
+<!--div style="position:fixed; left:0; padding:30px;  top:12%; width:100%;"> 
+
+
+</div--> 
+<div padding style="padding-top:20%;">
+<ion-list>
+ <ion-item  style="border:2px solid #FFFFFF; 
+	border-radius:10px;
+	height: 15px;
+	width: 98%;
+	color:#ffffff;
+	background-color:transparent;">
+    <ion-input type="number"
+ [(ngModel)]="email" placeholder="* Enter a Phone Number" ></ion-input>
+  </ion-item>
+   
+  <br/>
+  <ion-item style="border:2px solid #FFFFFF; 
+	border-radius:10px;
+	height: 15px;
+	width: 98%;
+	color:#ffffff;
+	background-color:transparent;">
+    
+   * <select [(ngModel)]="question"  style="width:85%;padding:20px;background-image:url('assets/img/bg.jpg');"  >
+                <option disabled value="" style="background-color:#45A9EA;color:#ffffff;font-size:13px;">Select security question</option>
+                <option style="background-color:#45A9EA;font-size:13px;" value="1">Your favorite movie?</option>
+                <option style="background-color:#45A9EA;font-size:13px;" value="2">Your child`s  nickname?</option>
+                <option style="background-color:#45A9EA;font-size:13px;" value="3">Your favorite color?</option>
+                <option style="background-color:#45A9EA;font-size:13px;" value="4">Your favorite food?</option>
+				<option style="background-color:#45A9EA;font-size:13px;" value="5">Your favorite song?</option>
+				<option style="background-color:#45A9EA;font-size:13px;" value="6">Your first girlfriend`s name?</option>
+				<option style="background-color:#45A9EA;font-size:13px;" value="7">Your first boyfriend`s name?</option>
+				<option style="background-color:#45A9EA;font-size:13px;" value="8">Your favorite actor?</option>
+				<option style="background-color:#45A9EA;font-size:13px;" value="9">Your favorite book?</option>
+				<option style="background-color:#45A9EA;font-size:13px;" value="10">Your favorite city?</option>
+				<option style="background-color:#45A9EA;font-size:13px;" value="11">Your favorite state?</option>
+     </select>
+			
+			 </ion-item>
+
+  <br/>
+  <ion-item  style="border:2px solid #FFFFFF; 
+	border-radius:10px;
+	height: 15px;
+	width: 98%;
+	color:#ffffff;
+	background-color:transparent;">
+    <ion-input type="text" [(ngModel)]="answer" placeholder="* Enter your answer" ></ion-input>
+  </ion-item>
+   <br/>
+    </ion-list>
+	</div>
+	
+  <div padding>
+   <ion-grid>
+  
+  <ion-row>
+    <ion-col col-12> 
+	<button ion-button full round (click)="showpassword()" style="color:#fff;" color="secondary" >Submit</button>
+   </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12> 
+	<button ion-button full round (click)="backtologin()" style="color:#fff;" color="default" >Cancel</button>
+   </ion-col>
+  </ion-row>
+</ion-grid>
+   </div>
+
+</ion-content>

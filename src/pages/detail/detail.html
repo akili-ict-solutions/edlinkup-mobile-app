@@ -1,0 +1,59 @@
+<!--
+    Generated template for the CallAttendPage page.
+
+    See http://ionicframework.com/docs/components/#navigation for more info on
+    Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <ion-title>EdLINKUP</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item style="font: 14px 'abel', Helvetica, sans-serif; color: #999; text-decoration: none; text-align: left; text-indent: 0; border-bottom: 2px solid #dedede;">
+        <ion-thumbnail (click)="getImage()" item-left>
+            <img [src]="imageURI" style=" width: 80px; border-radius: 60px; padding: 2px; border: #497953 thin solid;">
+           
+            <div style="padding: 1rem;"><ion-icon name="camera"></ion-icon>Edit</div>
+		</ion-thumbnail>
+        
+        <p [ngStyle]="{ 'margin-bottom.px': '28' }">
+		    <b>{{ user.firstName }} {{ user.lastName }}</b><br/>
+        
+            {{ user.phone }}<br/>
+        </p>
+	</ion-item>
+
+    <ion-list no-padding>
+        <ion-list-header>
+            <ion-icon name="build" item-start></ion-icon> Settings
+        </ion-list-header>
+
+        <ion-item>
+            <ion-icon name="ios-create-outline" item-start></ion-icon>
+            
+            <p>Edit Profile</p>
+        </ion-item>
+        
+        <ion-item (click)="showpassword()">
+            <ion-icon name="ios-settings-outline" item-start></ion-icon>
+        
+            <p>Change password</p>
+        </ion-item>
+        
+        <ion-item (click)="showAboutUsPage()">
+            <ion-icon name="ios-information-circle-outline" item-start></ion-icon>
+        
+            <p>About EdLINKUP</p>
+        </ion-item>
+
+        <ion-item (click)="logout()">
+            <ion-icon name="ios-log-out-outline" item-start></ion-icon>
+        
+            <p>Logout</p>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

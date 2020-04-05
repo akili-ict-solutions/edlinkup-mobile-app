@@ -1,0 +1,11 @@
+<ion-content style="background-color: #eee;">
+<ion-grid>
+<ion-item>
+	<ion-textarea placeholder="Write your post" [(ngModel)]="postEdit" style="border:#ccc solid 1px; background-color: #fff;padding:5px; border-radius:15px; min-height:500px ;" type="text" (input)="adjustTextarea($event);"></ion-textarea>
+ </ion-item>
+<ion-item>
+<button ion-button color="primary"(click)="closeModal('submit')" round>Submit</button>
+<button ion-button color="danger"  (click)="closeModal('cancel')" round>Cancel</button>
+</ion-item> 
+  </ion-grid>
+  </ion-content>
