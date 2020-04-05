@@ -1,0 +1,58 @@
+<ion-header>
+
+  <ion-navbar  >
+    <ion-title>   Comments</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+ 
+  <ion-row style="margin:0; padding:0;"  *ngFor="let items of comments let i=index; ">
+	      <ion-col style="margin:0; padding:0;" col-2>
+	     <button [style.backgroundImage]="'url('+imgaddlogo+userphoto(items.photo)+')'" style="background-size: cover;background-repeat: no-repeat;background-position: center;  background-color:#eeeeee" ion-fab mini  >
+         </button>
+	      </ion-col>
+        <ion-col style="" (click)="editPost(i,items)" col-10 tappable>
+	   <b style="color:#16105F  ;">{{items.username}} </b>   
+	   {{items.comment}}  <br/>
+
+	   <i><small style="color:#9897A0;">{{items.datetime|date}}</small></i>
+      </ion-col>
+      
+    </ion-row>
+	
+	
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+	      <ion-col col-2>
+	<button  [style.backgroundImage]="'url('+imgaddlogo+userphoto(images)+')'" style="background-color:#eeeeee;  bottom:10px; background-size:cover;
+background-repeat: no-repeat;" ion-fab mini  >
+</button>
+	</ion-col>
+      <ion-col style="height: 5%; " col-8>
+        <ion-textarea (input)="adjustTextarea($event);"
+          style=" height: 5%; margin-top: 3%; "
+          class="text-field" type="text"
+          placeholder="  Add a comment" [(ngModel)]="newComment">
+        </ion-textarea>
+      </ion-col>
+      <ion-col col-2>
+	  <button  (click)="onComment()"  style="background-color:transparent; color:#2153C8 ;   bottom:10px; background-size:cover;
+background-repeat: no-repeat;" ion-fab mini  [ngClass]="{'class1' : (newComment == null || newComment == '' )}" >Post
+</button>
+	  
+	  
+	  <!--button style="background-color:transparent;">
+        <span (click)="onComment()" style="color:#2153C8 ;  margin-top: 3%; " [ngClass]="{'class1' : (newComment == null || newComment == '' )}">
+        Post
+        </span>
+		</button-->
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

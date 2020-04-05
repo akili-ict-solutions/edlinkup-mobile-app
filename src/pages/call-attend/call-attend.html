@@ -1,0 +1,51 @@
+<!--
+    Generated template for the CallAttendPage page.
+
+    See http://ionicframework.com/docs/components/#navigation for more info on
+    Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Attendance</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-item>
+        {{ myDate|date }}
+    </ion-item>
+
+    <ion-list>
+        <ion-grid>
+            <ion-row *ngFor="let item of student let i=index">
+                <ion-col col-10>
+                    <div style="margin: 0; padding: 3px;" (click)="getImage(item.id, i)">
+                        <img id="student{{ i }}" [src]="imgaddlogo+userphoto(item.photo)" style="float: left; border-radius: 30px; width: 60px; height: 60px; padding: 5px;">
+
+                        <span style="text-transform: capitalize; margin: 25px 0 0 10px; float: left; font-weight: 800; font-size: 12px">{{ item.name }}</span>
+                    </div>
+                </ion-col>
+
+                <ion-col col-2>
+                    <ion-item style="padding:11px;">
+                        <ion-checkbox color="secondary" [checked]="attendStatus[i]" (click)="setattendance(item.id)" item-end></ion-checkbox>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <!-- <ion-item *ngFor="let item of student let i=index">
+            <ion-avatar item-start>
+                <img [src]="imgaddlogo+userphoto(item.photo)">
+            </ion-avatar>{{item.name}}
+
+            <h2>hhhhhhh</h2>
+
+            <ion-checkbox color="secondary" [checked]="attendStatus[i]" (click)="setattendance(item.id)" item-end></ion-checkbox>
+
+        </ion-item> -->
+    </ion-list>
+</ion-content>

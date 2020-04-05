@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar >
+    <ion-title >
+      <h1>Connect With</h1>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content  style=" padding:0; margin:0;" >
+ 
+
+
+<ion-list >
+ <ion-item *ngFor="let item of tasks" (click)="openConnect(item.name,item.id)">
+    <ion-icon name="ios-list-outline" item-start></ion-icon>
+     <p>{{ item.name }}</p>
+  </ion-item>
+  <!--ion-item *ngFor="let item of tasks" icon-right (click)="openConnect(item.name,item.id)">
+  	
+  </ion-item-->  
+</ion-list>
+</ion-content>

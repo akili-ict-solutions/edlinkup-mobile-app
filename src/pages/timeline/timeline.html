@@ -1,0 +1,475 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-color: #eee;">
+  <div *ngIf="position=='teacher'&&title!='Teacher_Result'&&title!='My_Student'&&title!='Class_Diary'&&title!='Class_Homework'&&title!='Class_Materials'">
+<ion-grid>
+ <ion-item>
+	<ion-textarea placeholder="Write your post" [(ngModel)]="post" style="border:#ccc solid 1px; background-color: #fff;padding:5px; border-radius:15px; min-height:60px ;" type="text" (input)="adjustTextarea($event);"></ion-textarea>
+   </ion-item>
+  </ion-grid>
+  <ion-item>
+  <button (click)="getImage()" ion-button outline item-end icon-start>
+      <ion-icon name="image"></ion-icon>
+    </button>
+    <button ion-button (click)="upload(post,panel)" outline item-end >
+      Post
+    </button>
+  </ion-item>
+  </div>
+  <img src="{{imageURI}}" *ngIf="imageFileName" width="100%"/>
+
+    <div  *ngIf="title=='Timeline'||title=='School_Timeline'||title=='Events'||title=='School_Events'||title=='Job'||title=='School_Job'">
+        <div *ngIf="title=='School_Timeline'||title=='School_Events'||title=='School_Job'">
+            <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%">
+              </div>
+                <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+                <div style="background-color:#3D6960 ; width: 100%">
+
+                        <ion-item >
+
+                            <ion-avatar item-left >
+                                <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+                            </ion-avatar>
+
+                            <h2>{{profiledata.name}}</h2>
+
+
+
+                        </ion-item>
+
+                </div>
+        </div><br/>
+	<div  *ngFor="let item of tasks_ let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:0; padding-bottom:3px;  padding-right:0;">
+       <div style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <p *ngIf="item.shared!=''" (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px;font-weight:600px;">{{item.shared}}</p>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;">{{item.profile}}</h2>
+            <p (click)="openTimeline(item.profile,item.idProfile)" >{{item.location}}
+        </p>
+		<ion-icon *ngIf="position=='teacher'" ios="ios-more" md="md-more" (click)="editPost(i,item)" item-end></ion-icon>
+
+  </ion-item>
+
+  <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+  <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+
+
+		 <ion-item style="font-size:11px; color:#666666; border-bottom:#eee thin solid;padding:0px; margin:0;">
+		  <span style="float:left;" >&nbsp;&nbsp;{{item.likes}}   Likes </span>
+		  <span style="float:left;" (click)="opentComment(item.id,imgaddlogo+userphoto(item.logo),item.user)" >  &nbsp;&nbsp;&nbsp; {{item.comments}}  Comments </span>
+		  <span style="float:right;">{{item.date|date}} </span>
+		 </ion-item>
+		 <ion-row style="margin:0;padding:0;" color="dark">
+          <ion-col center>
+            <button *ngIf="item.likeStatus!='true'" color="dark" (click)="openLikes(item.id,i,item.likes,item.likeStatus)"  ion-button icon-left clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;">  Like</div>
+            </button>
+			<button *ngIf="item.likeStatus=='true'" color="primary" (click)="openLikes(item.id,i,item.likes,item.likeStatus)"  ion-button icon-left clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;"> Like</div>
+            </button>
+          </ion-col>
+          <ion-col  center>
+            <button color="dark"   ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;" (click)="opentComment(item.id,imgaddlogo+userphoto(item.logo),item.user)"> Comment </div>
+            </button>
+          </ion-col>
+          <ion-col center text-center>
+            <button color="dark"   *ngIf="item.shared==''" ion-button icon-left clear small>
+              <ion-icon ios="ios-share" md="md-share"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;"  (click)="SharePost(item.id,item.shared,i);"> Share </div>
+            </button>
+
+			<button color="primary"  *ngIf="item.shared!=''" ion-button icon-left clear small>
+              <ion-icon ios="ios-share" md="md-share"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > Share </div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+</div>
+
+
+<div [ngSwitch]="title">
+    <ion-list *ngSwitchCase="'Teacher_Result'">
+        <div *ngIf="position!='teacher'">
+            <ion-item *ngFor="let item of classesreport" (click)="openManager(Profile.first_name, item, 'Post_Result');">
+                <ion-icon name="ios-list-outline" item-start></ion-icon>
+                <span style="color: #276A3D"> {{ item.cls }} {{ item.str }} </span> <br/> {{ item.sbj }}
+            </ion-item>
+        </div>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'My_Student'">
+        <ion-item *ngFor="let item of classesreports" (click)="openManager(Profile.first_name, item, 'My_Student');">
+            <ion-icon name="ios-list-outline" item-start></ion-icon>
+            <span style="color: #276A3D"> {{ item.cls }} {{ item.str }} </span>
+        </ion-item>
+    </ion-list>
+
+<ion-list *ngSwitchCase="'Class_Diary'">
+
+	 <ion-item *ngFor="let item of classesreports" (click)="openManager(Profile.first_name,item,'diary');"  >
+    <ion-icon name="ios-list-outline" item-start></ion-icon>
+    <span style="color:#276A3D"> {{item.cls}}  {{item.str}}</span>
+     </ion-item>
+
+	 </ion-list>
+
+	 <ion-list *ngSwitchCase="'Class_Homework'">
+
+	 <ion-item *ngFor="let item of classesreports" (click)="openManager(Profile.first_name,item,'homework');"  >
+    <ion-icon name="ios-list-outline" item-start></ion-icon>
+    <span style="color:#276A3D"> {{item.cls}}  {{item.str}}</span>
+     </ion-item>
+
+	 </ion-list>
+
+  <ion-list *ngSwitchCase="'Class_Materials'">
+
+	 <ion-item *ngFor="let item of classesreports" (click)="openManager(Profile.first_name,item,'resource');"  >
+    <ion-icon name="ios-list-outline" item-start></ion-icon>
+    <span style="color:#276A3D"> {{item.cls}}  {{item.str}}</span>
+     </ion-item>
+
+	 </ion-list>
+
+
+
+<ion-list *ngSwitchCase="'Profile'">
+    <div [style.backgroundImage]="'url('+imgaddlogo+schoolprofiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%">
+      </div>
+        <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+        <div style="background-color:#3D6960 ; width: 100%">
+
+                <ion-item >
+
+                    <ion-avatar item-left >
+                        <img [src]="imgaddlogo+userphoto(schoolprofiledata.logo)">
+                    </ion-avatar>
+
+                    <h2>{{schoolprofiledata.name}}</h2>
+
+
+
+                </ion-item>
+
+        </div>
+    <ion-item style="padding: 10px;">
+        <ion-label text-wrap>
+            <h4>ABOUT US</h4><br/>
+            <p style="text-align: justify; font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{schoolprofiledata.detail}}</p>
+          </ion-label>
+    </ion-item>
+    <ion-item style="padding: 10px;">
+        <ion-label text-wrap>
+            <h4>MISSION</h4>
+            <p style="text-align: justify; font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{schoolprofiledata.mission}}</p></ion-label>
+    </ion-item>
+    <ion-item style="padding: 10px;">
+        <ion-label text-wrap>
+            <h4>VISION</h4>
+            <p style="text-align: justify; font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{schoolprofiledata.vision}}</p></ion-label>
+    </ion-item>
+    <ion-item style="padding: 10px;">
+        <ion-label text-wrap>
+            <h4>MOTTO</h4>
+            <p style="text-align: justify; font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{schoolprofiledata.motto}}</p></ion-label>
+    </ion-item>
+</ion-list>
+
+
+
+  <ion-list *ngSwitchCase="'Gallery'">
+      <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%"></div>
+      <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+      <div style="background-color:#3D6960 ; width: 100%">
+          <ion-item >
+              <ion-avatar item-left >
+                  <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+              </ion-avatar>
+              <h2>{{profiledata.name}}</h2>
+          </ion-item>
+      </div>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'Services'">
+      <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%"></div>
+      <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+      <div style="background-color:#3D6960 ; width: 100%">
+          <ion-item >
+              <ion-avatar item-left >
+                  <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+              </ion-avatar>
+              <h2>{{profiledata.name}}</h2>
+          </ion-item>
+      </div>
+      <div *ngFor="let item of tasks">
+            <ion-item>
+                <ion-label text-wrap>
+                    <h4 style="text-transform:uppercase;">{{item.title}}</h4>
+                    <p style="text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.description}}</p>
+                    <img *ngIf="item.file!=''" [src]="imgaddlogo+item.file" style="width: 100%"/><br/>
+                    <i style="font-size: 12px;">Posted: {{item.date}}</i>
+                </ion-label>
+            </ion-item>
+        </div>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'Achievement'">
+      <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%"></div>
+      <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+      <div style="background-color:#3D6960 ; width: 100%">
+          <ion-item >
+              <ion-avatar item-left >
+                  <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+              </ion-avatar>
+              <h2>{{profiledata.name}}</h2>
+          </ion-item>
+      </div>
+      <div *ngFor="let item of tasks">
+            <ion-item (click)="openManager(item.name,item.idmember,'student')">
+                <ion-label text-wrap>
+                    <h4 style="text-transform:uppercase;">{{item.title}}</h4>
+                    <p style="text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.description}}</p>
+                    <img *ngIf="item.file!=''" [src]="imgaddlogo+item.file" style="width: 100%"/><br/>
+                    <i style="font-size: 12px;">Posted: {{item.date}}</i>
+                </ion-label>
+            </ion-item>
+        </div>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'Calendar'">
+      <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%"></div>
+      <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+      <div style="background-color:#3D6960 ; width: 100%">
+          <ion-item >
+              <ion-avatar item-left >
+                  <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+              </ion-avatar>
+              <h2>{{profiledata.name}}</h2>
+          </ion-item>
+      </div>
+      <!--<div *ngFor="let item of tasks">
+            <ion-item (click)="openManager(item.name,item.idmember,'student')">
+                <ion-label text-wrap>
+                    <h4 style="text-transform:uppercase;">{{item.title}}</h4>
+                    <p style="text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.description}}</p>
+                    <img *ngIf="item.file!=''" [src]="imgaddlogo+item.file" style="width: 100%"/><br/>
+                    <i>Posted: {{item.date}}</i>
+                </ion-label>
+            </ion-item>
+        </div>-->
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'Download'">
+      <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%"></div>
+      <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+      <div style="background-color:#3D6960 ; width: 100%">
+          <ion-item >
+              <ion-avatar item-left >
+                  <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+              </ion-avatar>
+              <h2>{{profiledata.name}}</h2>
+          </ion-item>
+      </div><br/>
+      <!--<div *ngFor="let item of tasks">
+            <ion-item text-wrap>
+                <h4 style="text-transform:uppercase;">{{item.title}}</h4>
+                <img item-left *ngIf="item.file!=''" [src]="imgaddlogo+'images/pdf.png'" (click)="previewPDF(imgadd+item.file, item.title)" style="width: 60px;height: 60px;"/><br/>
+                <p style="text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.description}}</p>
+                <i style="font-size: 12px;">Posted: {{item.date}}</i>
+            </ion-item>
+        </div>-->
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'Notice Board'">
+      <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%"></div>
+      <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+      <div style="background-color:#3D6960 ; width: 100%">
+            <ion-item >
+                <ion-avatar item-left >
+                    <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+                </ion-avatar>
+                <h2>{{profiledata.name}}</h2>
+            </ion-item>
+        </div>
+        <div *ngFor="let item of tasks">
+                <ion-item>
+                    <ion-label text-wrap>
+                        <h4 style="text-transform:uppercase;">{{item.title}}</h4>
+                        <p style="text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.description}}</p>
+                        <img *ngIf="item.file!=''" [src]="imgaddlogo+item.file" style="width: 100%"/><br/>
+                        <i style="font-size: 12px;">Posted: {{item.date}}</i>
+                    </ion-label>
+                </ion-item>
+            </div>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'Teachers'">
+
+        <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%"></div>
+        <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+        <div style="background-color:#3D6960 ; width: 100%">
+            <ion-item >
+                <ion-avatar item-left >
+                    <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+                </ion-avatar>
+                <h2>{{profiledata.name}}</h2>
+            </ion-item>
+        </div>
+        <div *ngFor="let item of tasks">
+            <ion-item>
+                <ion-thumbnail item-left style="height:10px;">
+                    <img [src]="imgaddlogo+userphoto(item.photo)">
+                </ion-thumbnail>
+                <h2>{{item.subject}}</h2>
+                <h3>Teacher: {{item.first_name}} {{item.last_name}}</h3>
+                <p>Phone: {{item.telephone}}</p>
+            </ion-item>
+        </div>
+
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'School Needs'">
+      <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%"></div>
+      <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+      <div style="background-color:#3D6960 ; width: 100%">
+          <ion-item >
+              <ion-avatar item-left >
+                  <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+              </ion-avatar>
+              <h2>{{profiledata.name}}</h2>
+          </ion-item>
+      </div>
+      <div *ngFor="let item of tasks">
+            <ion-item>
+                <ion-label text-wrap>
+                    <h4 style="text-transform:uppercase;">{{item.title}}</h4>
+                    <p style="text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.description}}</p>
+                    <img *ngIf="item.file!=''" [src]="imgaddlogo+item.file" style="width: 100%"/><br/>
+                    <i style="font-size: 12px;">Posted: {{item.date}}</i>
+                </ion-label>
+            </ion-item>
+        </div>
+
+  </ion-list>
+
+
+  <ion-list *ngSwitchCase="'School Stat'">
+      <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%"></div>
+      <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+      <div style="background-color:#3D6960 ; width: 100%">
+          <ion-item >
+              <ion-avatar item-left >
+                  <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+              </ion-avatar>
+              <h2>{{profiledata.name}}</h2>
+          </ion-item>
+      </div>
+      <div *ngFor="let item of tasks">
+            <ion-item>
+                <ion-label text-wrap>
+                    <h4 style="text-transform:uppercase;">{{item.title}}</h4>
+                    <p style="text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.description}}</p>
+                    <img *ngIf="item.file!=''" [src]="imgaddlogo+item.file" style="width: 100%"/><br/>
+                    <i>Posted: {{item.date}}</i>
+                </ion-label>
+            </ion-item>
+        </div>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'Message'">
+      <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%"></div>
+      <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+      <div style="background-color:#3D6960 ; width: 100%">
+          <ion-item >
+              <ion-avatar item-left >
+                  <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+              </ion-avatar>
+              <h2>{{profiledata.name}}</h2>
+          </ion-item>
+      </div><br/>
+      <div *ngFor="let item of tasks">
+            <ion-item>
+                <ion-label text-wrap>
+                    <h4 style="text-transform:uppercase;">{{item.title}}</h4>
+                    <p style="text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.description}}</p>
+                    <img *ngIf="item.file!=''" [src]="imgaddlogo+item.file" style="width: 100%"/><br/>
+                    <i>Posted: {{item.date}}</i>
+                </ion-label>
+            </ion-item>
+        </div>
+  </ion-list>
+
+
+  <ion-list *ngSwitchCase="'Contacts'">
+        <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%"></div>
+        <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+        <div style="background-color:#3D6960 ; width: 100%">
+            <ion-item >
+                <ion-avatar item-left >
+                    <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+                </ion-avatar>
+                <h2>{{profiledata.name}}</h2>
+            </ion-item>
+        </div><br/>
+        <div>
+                <ion-item>
+                    <ion-label text-wrap>
+                        <h4>CONTACT US</h4>
+                        <p style="text-transform:capitalize;text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">Phone: {{tasks.phone}}</p>
+                        <p style="text-transform:capitalize;text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">P.O.Box: {{tasks.pobox}}</p>
+                        <p style="text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">Email: {{tasks.email}}</p>
+                        <p style="text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">Website: {{tasks.website}}</p>
+                    </ion-label>
+                </ion-item>
+
+				<ion-item *ngFor="let item of tasks.contact">
+                    <ion-label text-wrap >
+                        <p style="text-transform:capitalize;text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">Position: {{item.position}} </p>
+                        <p style="text-transform:capitalize;text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">Name: {{item.first_name}} {{item.last_name}}</p>
+                        <p style="text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">Phone: {{item.telephone}} </p>
+                    </ion-label>
+                </ion-item>
+            </div>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'Donors'">
+      <div [style.backgroundImage]="'url('+imgaddlogo+profiledata.photo+')'" style="background-color:#3D6960 ;height: 12em;background-size:cover; width: 100%"></div>
+      <!--img [src]="imgaddlogo+photo" style="height: 12em; width: 100%"/-->
+      <div style="background-color:#3D6960 ; width: 100%">
+          <ion-item >
+              <ion-avatar item-left >
+                  <img [src]="imgaddlogo+userphoto(profiledata.logo)">
+              </ion-avatar>
+              <h2>{{profiledata.name}}</h2>
+          </ion-item>
+      </div><br/>
+      <div *ngFor="let item of tasks">
+            <ion-item>
+                <ion-label text-wrap>
+                    <h4 style="text-transform:uppercase;">{{item.title}}</h4>
+                    <p style="text-align: justify;font-style: normal;font-weight: normal;font-family: Arial, Helvetica, sans-serif;">{{item.description}}</p>
+                    <img *ngIf="item.file!=''" [src]="imgaddlogo+item.file" style="width: 100%"/><br/>
+                    <i style="font-size: 12px;">Posted: {{item.date}}</i>
+                </ion-label>
+            </ion-item>
+        </div>
+  </ion-list>
+
+  </div>
+</ion-content>

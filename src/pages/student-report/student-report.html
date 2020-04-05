@@ -1,0 +1,106 @@
+<!--
+  Generated template for the StudentReportPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+      <ion-title>STUDENT REPORT</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="printable-area">
+    <ion-item style=" padding:1px; margin:0;
+    font:  14px 'abel', Helvetica, sans-serif;
+    color: #999;
+    text-decoration: none; border:none;
+    text-align: left; text-transform:uppercase;
+    text-indent: 0;font-size: 12px;">
+      <ion-thumbnail item-left>
+          <img [src]="imgaddlogo+userphoto(photo)">
+      </ion-thumbnail>
+      <p item-center>
+          <b>{{name}}</b><br/>
+          {{classname}} {{streamname}} - {{year}}
+      </p>
+
+  <button ion-button (click)="createPdf()">Create PDF</button>
+  <!-- <button ion-button (click)="downloadPdf()" color="secondary" [disabled]="!pdfObj">Download PDF</button> -->
+  </ion-item>
+            <ion-row style="padding:4px 0 4px 2px ;background-color:#fff; ">
+                <ion-col col-12 style="padding:2px;font-weight:700; text-align:center;color:#212121; font-size:13px; "><span style="text-transform: uppercase;font-weight: 500;">{{schoolname}}</span><br/>{{termname}}<br/>{{examname}}&nbsp;REPORT<br/>FOR&nbsp;{{classname}}&nbsp;{{year}}</ion-col>
+                </ion-row>
+                <ion-row style="padding:4px 0 4px 2px ;background-color:#fff; ">
+                    <ion-col col-12 style="padding:2px;font-weight:700; text-align:center;color:#212121; font-size:12px; ">NOTE:&nbsp;<span *ngFor="let x of gradelevol" style="padding:1px;color:#212121; font-size:10px; ">{{x.grade}} &nbsp;&nbsp; {{x.uppermarks}}  - {{x.lowermarks}} {{x.remarks}} | &nbsp;&nbsp;</span></ion-col>
+                  </ion-row>
+            <ion-grid style="padding:3px 0 0 0; background-color:#eee;">
+                <ion-row >
+                  <ion-col col-4 style="padding:2px 2px 2px 8px;color:#212121;text-align:center; font-weight:700;font-size: 12px;">SUBJECT</ion-col>
+                  <ion-col col-2 style="padding:2px;font-weight:700; text-align:center;color:#212121;font-size: 12px;">MARKS</ion-col>
+                  <ion-col col-2 style="padding:2px;font-weight:700; text-align:center;color:#212121;font-size: 12px;">GRADE</ion-col>
+                  <ion-col col-4 style="padding:2px;font-weight:700; text-align:center; color:#212121;font-size: 12px;">TEACHER'S NAME</ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+              <ion-row *ngFor="let d of subject" style="padding:4px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+                <ion-col col-4 style="padding:4px;color:#212121;text-transform: uppercase;font-size:12px;text-align:center; font-weight:600;">{{d.subject}}</ion-col>
+                <ion-col col-2 style="padding:4px; text-align:center;font-size:12px;">{{d.marks}}</ion-col>
+                <ion-col col-2 style="padding:4px;  text-align:center;text-transform: uppercase;font-size:12px;">{{d.grade}}</ion-col>
+                <ion-col col-4 style="padding:4px;  text-align:center;font-size:12px;text-transform: uppercase;">{{d.teachersubject}}</ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-grid style="padding:3px 0 0 0; background-color:#eee;">
+                <ion-row >
+                  <ion-col col-3 style="padding:2px 2px 2px 8px;color:#212121; font-weight:700;text-align:center;font-size: 12px;">TOTAL SCORE</ion-col>
+                  <ion-col col-3 style="padding:2px;font-weight:700; text-align:center;color:#212121;font-size: 12px;">AVERAGE</ion-col>
+                  <ion-col col-3 style="padding:2px;font-weight:700; text-align:center;color:#212121;font-size: 12px;">DIVISION</ion-col>
+                  <ion-col col-3 style="padding:2px;font-weight:700; text-align:center; color:#212121;font-size: 12px;">POINT</ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+              <ion-row style="padding:4px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+                <ion-col col-3 style="padding:4px;color:#212121; font-size:12px;text-align:center; font-weight:600;">{{total}}</ion-col>
+                <ion-col col-3 style="padding:4px; text-align:center;font-size:12px;">{{average}}</ion-col>
+                <ion-col col-3 style="padding:4px;  text-align:center;font-size:12px;">{{division}}</ion-col>
+                <ion-col col-3 style="padding:4px;  text-align:center;font-size:12px;">{{points}}</ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-grid style="padding:3px 0 0 0; background-color:#eee;">
+                <ion-row >
+                  <ion-col col-3 style="padding:2px 2px 2px 8px;color:#212121; font-weight:700;text-align:center;font-size: 12px;">GRADE</ion-col>
+                  <ion-col col-3 style="padding:2px;font-weight:700; text-align:center;color:#212121;font-size: 12px;">REMARK</ion-col>
+                  <ion-col col-3 style="padding:2px;font-weight:700; text-align:center;color:#212121;font-size: 12px;">RANK</ion-col>
+                  <ion-col col-3 style="padding:2px;font-weight:700; text-align:center; color:#212121;font-size: 12px;">OUT OF</ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+              <ion-row style="padding:4px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+                <ion-col col-3 style="padding:4px;color:#212121; font-size:12px; text-align:center;font-weight:600;">{{grade}}</ion-col>
+                <ion-col col-3 style="padding:4px; text-align:center;font-size:12px;">{{remark}}</ion-col>
+                <ion-col col-3 style="padding:4px;  text-align:center;font-size:12px;">{{rank}}</ion-col>
+                <ion-col col-3 style="padding:4px;  text-align:center;font-size:12px;">{{studenttotal}}</ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-grid style="padding:3px 0 0 0; background-color:#eee;">
+                <ion-row >
+                  <ion-col col-4 style="padding:2px 2px 2px 8px;color:#212121;text-align:center; font-weight:700;font-size: 12px;">CLASS TEACHER</ion-col>
+                  <ion-col col-4 style="padding:2px;font-weight:700; text-align:center;color:#212121;font-size: 12px;">SCHOOL STAMP</ion-col>
+                  <ion-col col-4 style="padding:2px;font-weight:700; text-align:center;color:#212121;font-size: 12px;">HEAD OF SCHOOL</ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+              <ion-row style="padding:4px 0 4px 2px ;background-color:#fff; border-bottom:#ccc thin solid;">
+                <ion-col col-4 style="padding:4px; text-align: center;font-size: 12px;">{{teacher}}</ion-col>
+                <ion-col col-4 style="padding:4px; text-align:center;font-size: 12px;">
+                    <ion-thumbnail item-left>
+                        <img [src]="imgaddlogo+userphoto(schoolstamp)" style="width: 90px;height:45px;align-items: center;">
+                    </ion-thumbnail>
+                </ion-col>
+                <ion-col col-4 style="padding:4px; text-align:center;font-size: 12px;">{{headteacher}}</ion-col>
+              </ion-row>
+            </ion-grid>
+
+</ion-content>

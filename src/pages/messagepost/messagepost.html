@@ -1,0 +1,67 @@
+<!--
+  Generated template for the MessagepostPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title style="text-transform: capitalize;color:#16105F;font-size: 12px;">{{id.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+    <ion-list >
+        <ion-item *ngFor="let item of comments let i=index" (click)="posts(item)">
+            <ion-avatar style="padding-top:0; margin-top:0;" item-start>
+                <img [src]="imgaddlogo+userphoto(item.logo)">
+            </ion-avatar>
+            <p style="text-align:left;">
+			
+                <!--ion-icon *ngIf="item.photo!=''" style="font-size:20px; color:#7A92AD;" ios="ios-image-outline" md="ios-image-outline" item-start></ion-icon-->
+                {{item.message}}<br/><i><small style="color:#9897A0;">&nbsp;{{item.date|date}}</small></i>
+            </p>
+       </ion-item>
+    </ion-list>
+
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+  
+  
+		
+		
+		<ion-row>
+	      <ion-col col-2>
+	<button  [style.backgroundImage]="'url('+imgaddlogo+userphoto(images)+')'" style="background-color:#eeeeee;  bottom:10px; background-size:cover;
+background-repeat: no-repeat;" ion-fab mini  >
+</button>
+	</ion-col>
+      <ion-col style="height: 5%; " col-8>
+        <ion-textarea (input)="adjustTextarea($event);"
+          style=" height: 5%; margin-top: 3%; "
+          class="text-field" type="text"
+          placeholder="  Add a comment" [(ngModel)]="newComment">
+        </ion-textarea>
+      </ion-col>
+      <ion-col col-2>
+	  <button  (click)="onComment()"  style="background-color:transparent; color:#2153C8 ;   bottom:10px; background-size:cover;
+background-repeat: no-repeat;" ion-fab mini  [ngClass]="{'class1' : (newComment == null || newComment == '' )}" >Post
+</button>
+	  
+	  
+	  <!--button style="background-color:transparent;">
+        <span (click)="onComment()" style="color:#2153C8 ;  margin-top: 3%; " [ngClass]="{'class1' : (newComment == null || newComment == '' )}">
+        Post
+        </span>
+		</button-->
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

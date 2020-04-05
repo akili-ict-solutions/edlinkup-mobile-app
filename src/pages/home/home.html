@@ -1,0 +1,267 @@
+
+
+<ion-header   color="light"   >
+
+<ion-navbar >
+ <ion-buttons  style="float:left !important;">
+ <button  ion-button icon-only clear (click)="openDetail()">
+        <ion-icon  ios="ios-menu" md="md-menu"></ion-icon>
+		</button>
+	  </ion-buttons>
+    <ion-title text-center>EdLINKUP</ion-title>
+	<ion-buttons end>
+
+      <button  (click)="search();" ion-button icon-only clear>
+        <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      </button>
+
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content style="margin:0;">
+
+
+
+<!-- pull to refresh..... #contentRef (ionScroll)="scrollingFun($event)" (ionScroll)="scrollingFun($event)" -->
+    <ion-refresher class="spinner-calm" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+<!--ion-card -->
+
+	
+	
+	<ion-list *ngIf="acclist>0" style="background-color:#FFFFFF;border-bottom:#ccc 2px solid; padding-left:10px; ">
+	  
+	<h2  style="font-size:12px; font-weight:600 !important;">Your Accounts</h2>
+    <ion-scroll scrollX="true">
+       <div  *ngFor="let item of accounts" class="scroll-item" (click)="openManager(item.name,item.idmember,item.position,item)" >
+	   <ion-row *ngIf="(item.position=='teacher')||(item.position=='student')" >
+       <ion-col text-center>
+       <img [src]="imgaddlogo+userphoto(item.photo)" style="width:80px;height:80px; border-radius:60px; padding:2px; border:#497953 thin solid;">
+	   <p style="font-size:11px; text-align:center; text-transform:Capitalize; color:#000;padding:1px; margin:0;">{{item.name}}<br/> {{item.position}}</p>
+	   <!--p style="font-size:11px; text-align:center;text-transform:Capitalize; color:#000;padding:1px; margin:0;">{{item.profile}}  </p-->
+	   </ion-col>
+ </ion-row>
+	</div>
+
+</ion-scroll>
+
+
+	
+</ion-list>	
+	
+	
+	
+   <ion-segment  [(ngModel)]="segments"  color="dark" stype="">
+      <ion-segment-button value="timeline" (click)="Panel('news');" style="text-transform:capitalize important!;  font-size:11px;">
+        TimeLine
+      </ion-segment-button>
+      <ion-segment-button value="events" (click)="Panel('event');" style="text-transform:capitalize important!;   font-size:11px;">
+        Events
+      </ion-segment-button>
+	 <ion-segment-button value="job" (click)="Panel('job');" style="text-transform:capitalize important!;   font-size:11px;">
+        Jobs
+      </ion-segment-button>
+    </ion-segment>
+<!--div style="background-color:#6699ff; height:48px;margin:3px 0 3px 0;">
+<ion-searchbar style="background-color:#6699ff; height:20px; border-radius; padding:2px  ;" ></ion-searchbar>
+</div-->
+
+<div [ngSwitch]="segments">
+    <ion-list *ngSwitchCase="'timeline'" style="background-color:#E7E2E1; ">
+	  <div  *ngFor="let item of news let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:0; padding-bottom:3px;  padding-right:0;">
+       <div style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <p *ngIf="item.shared!=''" (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px;font-weight:600px;">{{item.shared}}</p>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;text-transform: capitalize;">{{item.profile}}</h2>
+            <p (click)="openTimeline(item.profile, item.idProfile)" style="font-size: 12px;">{{item.schoolname}}</p>
+		<button (click)="openFollows(item.idUser,i,item.followStatus)" style="font-size:9px" ion-button  color="segment" *ngIf="item.followStatus!='true'" icon-left outline item-end>
+		<ion-icon name="add"></ion-icon>
+		Follow</button>
+		<button (click)="openFollows(item.idUser,i,item.followStatus)" style="font-size:9px" ion-button color="primary" *ngIf="item.followStatus=='true'"  clear item-end>Following</button>
+        
+  </ion-item>
+  
+  <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+  <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+    
+  
+		 <ion-item style="font-size:11px; color:#666666; border-bottom:#eee thin solid;padding:0; margin:0;">
+		  <span style="float:left;" >&nbsp;&nbsp;{{item.likes}}   Likes </span>
+		  <span style="float:left;" (click)="opentComment(item.id,imgaddlogo+userphoto(item.logo),item.user)" >  &nbsp;&nbsp;&nbsp; {{item.comments}}  Comments </span>
+		  <span style="float:right;">{{item.date|date}} </span>
+		 </ion-item>
+		 <ion-row style="margin:0;padding:0;" color="dark">
+          <ion-col center>
+            <button *ngIf="item.likeStatus!='true'" color="dark" (click)="openLikes(item.id,i,item.likes,item.likeStatus)"  ion-button icon-left clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;">  Like</div>
+            </button>
+			<button *ngIf="item.likeStatus=='true'" color="primary" (click)="openLikes(item.id,i,item.likes,item.likeStatus)"  ion-button icon-left clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;"> Like</div>
+            </button>
+          </ion-col>
+          <ion-col  center>
+            <button color="dark"   ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;" (click)="opentComment(item.id,imgaddlogo+userphoto(item.logo),item.user)"> Comment </div>
+            </button>
+          </ion-col>
+          <ion-col center text-center>
+            <button color="dark"   *ngIf="item.shared==''" ion-button icon-left clear small>
+              <ion-icon ios="ios-share" md="md-share"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;"  (click)="SharePost(item.id,item.shared,i);"> Share </div>
+            </button>
+			
+			<button color="primary"  *ngIf="item.shared!=''" ion-button icon-left clear small>
+              <ion-icon ios="ios-share" md="md-share"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > Share </div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+	
+
+
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'events'" style="background-color:#E7E2E1; ">
+      <div  *ngFor="let item of news let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:0; padding-bottom:3px;  padding-right:0;">
+       <div style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <p *ngIf="item.shared!=''" (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px;font-weight:600px;">{{item.shared}}</p>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;text-transform: capitalize;">{{item.profile}}</h2>
+            <p (click)="openTimeline(item.profile,item.idProfile)" style="font-size: 12px;">{{item.schoolname}}  
+        </p>
+		<button  (click)="openFollows(item.idUser,i,item.followStatus)"  style="font-size:9px" ion-button  color="segment" *ngIf="item.followStatus!='true'" icon-left outline item-end>
+		<ion-icon name="add"></ion-icon>
+		Follow</button>
+		<button (click)="openFollows(item.idUser,i,item.followStatus)" style="font-size:9px" ion-button color="primary" *ngIf="item.followStatus=='true'"  clear item-end>Following</button>
+        
+  </ion-item>
+  
+  
+    <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+ 
+ <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+
+  
+		 <ion-item style="font-size:11px; color:#666666; border-bottom:#eee thin solid;padding:0; margin:0;">
+		  <span style="float:left;" >&nbsp;&nbsp;{{item.likes}}   Likes </span>
+		  <span style="float:left;" (click)="opentComment(item.id,imgaddlogo+userphoto(item.logo),item.user)" >  &nbsp;&nbsp;&nbsp; {{item.comments}}  Comments </span>
+		  <span style="float:right;">{{item.date|date}} </span>
+		 </ion-item>
+		 <ion-row style="margin:0;padding:0;" color="dark">
+          <ion-col center>
+            <button *ngIf="item.likeStatus!='true'" color="dark" (click)="openLikes(item.id,i,item.likes,item.likeStatus)"  ion-button icon-left clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;">  Like</div>
+            </button>
+			<button *ngIf="item.likeStatus=='true'" color="primary" (click)="openLikes(item.id,i,item.likes,item.likeStatus)"  ion-button icon-left clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;"> Like</div>
+            </button>
+          </ion-col>
+          <ion-col  center>
+            <button color="dark"   ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;" (click)="opentComment(item.id,imgaddlogo+userphoto(item.logo),item.user)"> Comment </div>
+            </button>
+          </ion-col>
+          <ion-col center text-center>
+            <button color="dark"   *ngIf="item.shared==''" ion-button icon-left clear small>
+              <ion-icon ios="ios-share" md="md-share"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;"  (click)="SharePost(item.id,item.shared,i);"> Share </div>
+            </button>
+			
+			<button color="primary"  *ngIf="item.shared!=''" ion-button icon-left clear small>
+              <ion-icon ios="ios-share" md="md-share"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > Share </div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+    </ion-list>
+	
+	
+	
+    <ion-list *ngSwitchCase="'job'" style="background-color:#E7E2E1; ">
+  
+	  <div  *ngFor="let item of news let i=index;"   style="margin-left:0;margin-right:0; margin-bottom:8px; padding-left:0; padding-bottom:3px;  padding-right:0;">
+       <div style=" background-color:#fff;border:#A6B0B2;">
+  <ion-item >
+    <ion-avatar item-start>
+      <img [src]="imgaddlogo+userphoto(item.logo)" style="background-color: #FFFFFF; ">
+    </ion-avatar>
+     <p *ngIf="item.shared!=''" (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px;font-weight:600px;">{{item.shared}}</p>
+     <h2 (click)="openTimeline(item.profile,item.idProfile)" style="font-size:12px; font-weight:600 !important;text-transform: capitalize;">{{item.profile}}</h2>
+            <p (click)="openTimeline(item.profile,item.idProfile)" style="font-size: 12px;">{{item.schoolname}}  
+        </p>
+		<button (click)="openFollows(item.idUser,i,item.followStatus)" style="font-size:9px" ion-button  color="segment" *ngIf="item.followStatus!='true'" icon-left outline item-end>
+		<ion-icon name="add"></ion-icon>
+		Follow</button>
+		<button (click)="openFollows(item.idUser,i,item.followStatus)" style="font-size:9px" ion-button color="primary" *ngIf="item.followStatus=='true'"  clear item-end>Following</button>
+        
+  </ion-item>
+  
+  <p *ngIf="item.name!=''"   style="text-align:left; padding:3px; margin:3px;" [innerHTML]="item.name"></p>
+  <img  *ngIf="item.photo!=''" [src]="imgadd+item.photo"  style="background-color: #FFFFFF;width:100%;">
+    
+  
+		 <ion-item style="font-size:11px; color:#666666; border-bottom:#eee thin solid;padding:0; margin:0;">
+		  <span style="float:left;" >&nbsp;&nbsp;{{item.likes}}   Likes </span>
+		  <span style="float:left;" (click)="opentComment(item.id,imgaddlogo+userphoto(item.logo),item.user)" >  &nbsp;&nbsp;&nbsp; {{item.comments}}  Comments </span>
+		  <span style="float:right;">{{item.date|date}} </span>
+		 </ion-item>
+		 <ion-row style="margin:0;padding:0;" color="dark">
+          <ion-col center>
+            <button *ngIf="item.likeStatus!='true'" color="dark" (click)="openLikes(item.id,i,item.likes,item.likeStatus)"  ion-button icon-left clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;">  Like</div>
+            </button>
+			<button *ngIf="item.likeStatus=='true'" color="primary" (click)="openLikes(item.id,i,item.likes,item.likeStatus)"  ion-button icon-left clear small>
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;"> Like</div>
+            </button>
+          </ion-col>
+          <ion-col  center>
+            <button color="dark"   ion-button icon-left clear small>
+              <ion-icon name="text"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;" (click)="opentComment(item.id,imgaddlogo+userphoto(item.logo),item.user)"> Comment </div>
+            </button>
+          </ion-col>
+          <ion-col center text-center>
+            <button color="dark"   *ngIf="item.shared==''" ion-button icon-left clear small>
+              <ion-icon ios="ios-share" md="md-share"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;"  (click)="SharePost(item.id,item.shared,i);"> Share </div>
+            </button>
+			
+			<button color="primary"  *ngIf="item.shared!=''" ion-button icon-left clear small>
+              <ion-icon ios="ios-share" md="md-share"></ion-icon>
+              <div style="font-size:12px;text-transform:capitalize !important;"  > Share </div>
+            </button>
+          </ion-col>
+        </ion-row>
+</div>
+</div>
+	  
+	  </ion-list>
+	
+	
+  </div>
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content>
+      loadingSpinner="bubbles"
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

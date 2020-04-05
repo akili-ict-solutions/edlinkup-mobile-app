@@ -1,0 +1,28 @@
+page-forgoten {
+
+
+$colors: (
+  primary:    #488aff,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #ffffff,
+  dark:       #222
+);
+
+.text-input::-moz-placeholder {
+  color: white;
+}
+
+.text-input:-ms-input-placeholder {
+  color: white;
+}
+
+.text-input::-webkit-input-placeholder {
+  text-indent: 0;
+  color: white;
+}
+.yourCssClassName {
+    color:#ddd;
+   text-align:center;
+  }
+}

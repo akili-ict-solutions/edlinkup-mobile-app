@@ -1,0 +1,1037 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams,ModalController  } from 'ionic-angular';
+import {  ApiProvider } from '../../providers/api/api';
+import { Http} from '@angular/http';
+import 'rxjs/add/operator/map';
+import { AlertController , ActionSheetController, LoadingController, ToastController } from 'ionic-angular';
+import { FileTransfer,FileUploadOptions, FileTransferObject} from '@ionic-native/file-transfer';
+import { Camera } from '@ionic-native/camera';
+import {ExamPage} from "../exam/exam";
+import {CallAttendPage} from "../call-attend/call-attend";
+import {StudentPage} from "../student/student";
+import { EditModalPage } from "../edit-modal/edit-modal";
+import {CommentsPage} from "../comments/comments";
+import { Storage } from '@ionic/storage';
+
+@Component({
+  selector: 'page-manager',
+  templateUrl: 'manage.html'
+})
+export class ManagePage {
+	imageURI:any='';
+imageFileName:boolean = false;
+  segments:any='Mon';
+  segments_teacher:any='students';
+  Teacher_Timetable:any;
+  Teacher_Subject:any;
+  Feepanel:any='Account';
+  title:any;
+  id:any;
+  post:any;
+  classesList:any='';
+  subjectId:any='';
+  classId:any='';
+  streamId:any='';
+  imgupload:any='';
+  studentid:any='';
+  getdiary:any='';
+  getTdiary:any='';
+  
+  Staff:any='';
+  teacherdiary:any;
+  news:any='';
+  className:any='';
+  streamName:any='';
+  subjectName:any='';
+  ExamName:any=new Array();
+  TermName:any=new Array();
+  
+  
+  studentProfile:any='';
+  idSchool:any='';
+  name:any;
+  marks:any=new Array();
+  marks2:any=new Array();
+  marksid:any=new Array();
+  Data:any='';
+  Timetable:any='';
+  myDate:any=new Date();
+  Attendance:any='';
+  tasks:any='';
+  Profile:any='';
+  School:any='';
+  Reports:any='';
+  Gallery:any='';
+  Subjects:any='';
+  Diary:any='';
+  diary:any=new Date();
+  Fee:any='';
+  classinfo='';
+  stream='';
+  member:any;
+  Payment:any='';
+  Required:any='';
+  Documents:any='';
+  terms:any='';
+  idProfile:any='';
+  idMember:any='';
+  exams:any='';
+  position:any='';
+  exam=0;
+  term=0;
+  NoticeBoard:any='';
+  data:any='';
+  panel:any='news';
+  
+  urltask=this.Api.ApiPath+'=studentReport&x1=';
+   
+  
+  urlteacherTimetable:any='';
+  imgadd: string =this.Api.imgadd;
+  imgaddlogo: string =this.Api.imgaddlogo;
+  
+   constructor(public navCtrl: NavController,
+               private alertCtrl: AlertController, 
+			   public navParams: NavParams, 
+			   public http:Http,public actionSheetCtrl: ActionSheetController, 
+			   public Api:ApiProvider,
+			   private transfer: FileTransfer,
+               private camera: Camera,public storage: Storage,
+               public loadingCtrl: LoadingController,
+               public toastCtrl: ToastController,public modalCtrl: ModalController ) {
+	this.title = navParams.get('title');
+	this.id = navParams.get('id');
+	//console.log(this.id);
+	this.studentid =navParams.get('studentid');
+	this.studentid =navParams.get('studentid');
+	this.Data = navParams.get('data');
+	this.position=navParams.get('position');
+	this.idProfile=navParams.get('idProfile');
+	this.idSchool=navParams.get('idProfile');
+    this.idMember=navParams.get('idMember');
+    this.name = navParams.get('name');		
+	
+	
+	if(this.title=='ClassTeacher'){
+		 this.myclasses(this.idMember,this.idSchool);
+	  }
+	  
+	  if(this.title=='Staff'){
+		 this.getStaff(this.idSchool);
+	  }
+	  
+	  
+	  if(this.title=='Duties'){
+		 this.getStaff(this.idSchool);
+	  }
+	  if(this.title=='NoticeBoard'){
+		 this.getSchool(this.idSchool);
+	  }
+	
+	
+	  if(this.title=='Timetable'){
+		this.Timetable=this.id;
+	  }
+	  
+	  if(this.title=='Events'){
+		this.Timetable=this.id;
+	  }
+	  if(this.title=='Jobs'){
+		this.Timetable=this.id;
+	  }
+	  
+	  if(this.title=='Teacher_Timetable'){
+		  
+		this.TeacherTimetable(this.idProfile,this.idMember);
+		
+	  }
+	  if(this.title=='Attendance'){
+		this.Attendance=this.id;
+	  }
+	   if(this.title=='Profile'){
+		   this.Profile=this.id.profile;
+		this.member=this.Profile.parentdetail;
+		//console.log(this.id);
+		
+		//this.navCtrl.push(studentprofilePage,{data:this.Profile});
+	
+	  }
+	  if(this.title=='Reports'){
+		this.Reports=this.id;
+	  }
+	  if(this.title=='Subjects'){
+		this.Subjects=this.id;
+	  }
+	  if(this.title=='Fee'){
+		this.Required=this.id.required;
+		this.Payment=this.id.payment;
+	  }
+	  if(this.title=='Documents'){
+		this.panel='resource'; 
+		this.getstudentdiary('resource');
+	  }
+	  
+	  if(this.title=='Homeworks'){
+		this.getstudentdiary('homework');
+		this.panel='homework';
+	  }
+	  if(this.title=='Diary'){
+		  
+		this.getstudentdiary('diary');
+		this.panel='diary';
+	  }
+	  if(this.title=='Gallery'){
+	  }
+	  
+	
+	this.TeacherSubjectManage('news');
+
+	
+  }
+  
+  getImage() {
+	  
+	  let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select Image Source',
+      buttons: [
+        { icon:'ios-image-outline',
+          text: 'Gallery',
+          handler: () => {
+	
+             this.picture(this.camera.PictureSourceType.PHOTOLIBRARY);
+            
+          }
+        },
+        { 
+		
+		  icon:'ios-camera-outline',
+          text: 'Camera',
+          handler: () => {
+			  
+  
+            this.picture(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+		{ 
+		
+		  icon:'ios-close-circle-outline',
+          text: 'Cancel',
+		  role: 'cancel'
+        }
+        
+      ]
+    });
+    actionSheet.present();
+  
+	  
+	  
+  
+
+  
+}
+  picture(sourceType){
+	  
+	   var options = {
+    quality: 100,
+    sourceType: sourceType,
+    saveToPhotoAlbum: false,
+    correctOrientation: true,
+	allowEdit: true
+  };
+  
+  this.camera.getPicture(options).then((imageData) => {
+    this.imageURI = imageData;
+	this.imageFileName= true;
+  }, (err) => {
+    console.log(err);
+    this.presentToast(err);
+  });
+  }
+  
+  
+  uploadFile(x,y) {
+ // let loader = this.loadingCtrl.create({
+ //   content: "Uploading..."
+ // });
+ // loader.present();
+  const fileTransfer: FileTransferObject = this.transfer.create();
+
+  let options = {
+    fileKey: 'image',
+    fileName: 'image.jpg',
+    chunkedMode: false,
+    mimeType: "image/jpeg",
+    headers: {} 
+  }
+ for(let i=0; i<this.Teacher_Subject.length; i++){
+		 this.marksid[i]=this.Teacher_Subject[i].id; 
+		}
+		let link =this.Api.ApiPath+"=study&x1="+this.idProfile+"&x3="+y+"&x2=&x4="+this.idMember+"&x5=&x6=";
+		
+		//let headers = new Headers({ 'Content-Type': 'multipart/form-data' });
+	
+    
+  fileTransfer.upload(this.imageURI,link, options)
+    .then((data) => {
+    console.log(data+" Uploaded Successfully");
+	this.presentToast("Image uploaded successfully");
+    //this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
+    //loader.dismiss();
+    this.presentToast("Image uploaded successfully");
+  }, (err) => {
+    console.log(err);
+    //loader.dismiss();
+    this.presentToast(err);
+  });
+}
+  
+  presentToast(msg) {
+  let toast = this.toastCtrl.create({
+    message: msg,
+    duration: 3000,
+    position: 'bottom'
+  });
+
+  toast.onDidDismiss(() => {
+    console.log('Dismissed toast');
+  });
+
+  toast.present();
+}
+
+  myclasses(id,school){
+	  let link =this.Api.ApiPath+"=myClassAttendance&x1="+id+"&x2="+school;
+	  console.log(link);
+	  this.http.get(link).map(res => res.json())
+       .subscribe(data => {
+		 console.log(data);
+		 this.classesList=data;
+		});
+		
+    }
+	  
+	  
+	  getSchool(school){
+	  this.Api.getSchoolProfile(school).map(res => res.json())
+       .subscribe(data => {
+		 this.NoticeBoard=data.Notice;
+		});
+		
+    }
+	
+	getStaff(school){
+	  this.Api.getMembers(school).map(res => res.json())
+       .subscribe(data => {
+		   console.log(data);
+		 this.Staff=data;
+		});
+		
+    }
+ 
+  
+  TeacherTimetable(id,school){
+	  this.Api.getTeacherTimetable(id,school)
+       .map(res => res.json())
+       .subscribe(data => {
+		 console.log(data.timetable);
+		 this.Teacher_Timetable=data.timetable;
+		});
+		
+    }
+	
+	TeacherSubjectManage(panel){
+		
+        this.Api.getUpdates(0,10,this.panel,2).map(res => res.json())
+       .subscribe(data => {
+        this.data = data;
+		this.news=this.data.updates;
+		//console.log(this.panel);
+		
+       });
+		
+       
+
+        setTimeout(() => {
+            console.log('Async operation has ended');
+            
+        }, 2000);
+	}
+	
+	adjustTextarea(event: any): void {
+	let textarea: any		= event.target;
+	textarea.style.overflow = 'hidden';
+	textarea.style.height 	= 'auto';
+	textarea.style.height 	= textarea.scrollHeight + 'px';
+	return;
+}
+	
+	TeacherSubjects(classId,streamId,subjectId,className,streamName,subjectName){
+		this.className=className;
+		this.streamName=streamName;
+		this.subjectName=subjectName;
+		
+		this.classId=classId;
+		this.streamId=streamId;
+		this.subjectId=subjectId;
+		//console(this.classId);
+		//console(this.streamId);
+		//console(this.subjectId);
+		
+		
+		this.title="Teacher";
+		let schoolID=this.idProfile;
+		//http://edlinkup.co.tz/classes/dataHandler.php?x=getstudentlist&x1=2018&x2=4&x3=5&x4=1&x5=1&x6=5
+	   this.Api.getTeacherSubjects(schoolID,classId,streamId)
+       .map(res => res.json())
+       .subscribe(data => {
+		 //console.log(data);
+		 this.classinfo=data.classinfo;
+		// console.log(this.classinfo);
+		 this.stream=data.stream;
+		 //console.log(this.stream);
+		 this.Teacher_Subject=data.students;
+		 this.marks=new Array(this.Teacher_Subject.length);
+		});
+		
+		this.Api.getTerms(this.idProfile,'getTerm')
+		.map(res => res.json())
+        .subscribe(data => {
+		 //console.log(data.terms);
+		 this.terms=data.terms;
+		});
+		this.Api.getTerms(this.idProfile,'getExam')
+		.map(res => res.json())
+        .subscribe(data => {
+		 //console.log(data.terms);
+		 this.exams=data;
+		});
+		
+    }
+	
+	
+	savemarks(){
+		 if(this.exam==0){
+			this.presentPrompt(); 
+			return false;
+		 }
+		 if(this.term==0){
+			 this.presentPromptTerm(); 
+			return false;
+			 
+		 }
+		 
+		
+		
+	
+	 for(var i=0; i<this.Teacher_Subject.length; i++){
+		 this.marksid[i]=this.Teacher_Subject[i].id; 
+		}
+	 
+	 
+	 
+	
+	 this.Api.APIsaveResults(this.marksid,
+	                         this.marks,
+							 this.term,
+							 this.exam,
+							 this.classId,
+							 this.streamId,
+							 this.subjectId,
+							 this.idMember,
+							 this.idProfile
+							 );
+							 
+							 
+						 console.log(this.marks);
+						 
+	 /*for(var k=0; k<this.Teacher_Subject.length; k++){
+		 this.marks[k]=''; 
+		}
+	 
+							
+		*/					
+		
+	 }
+	 
+	
+ presentPrompt() {
+	 
+	  for(var i=0; i<this.exams.length; i++){
+		 this.ExamName[i]={label:this.exams[i].exam,
+		                   type:'radio',
+						   value:this.exams[i].id
+		                   };
+	 }
+  let alert = this.alertCtrl.create({
+    title: 'Select Exam',
+    inputs: this.ExamName,
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Ok',
+        handler: data => {
+        this.exam=data;
+		
+        }
+      }
+    ]
+  });
+  alert.present();
+}
+
+
+presentPromptTerm() {
+	 
+	  for(var i=0; i<this.terms.length; i++){
+		 this.TermName[i]={label:this.terms[i].name,
+		                   type:'radio',
+						   value:this.terms[i].id
+		                   };
+	 }
+  let alert = this.alertCtrl.create({
+    title: 'Select Term',
+    inputs: this.TermName,
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Ok',
+        handler: data => {
+        this.term=data;
+        }
+      }
+    ]
+  });
+  alert.present();
+}
+
+
+userphoto(x){
+	  
+	  if((x=='')||(x==null)||(x=='undefined')){
+		  
+		 return 'images/noimage.jpg'; 
+	  }else{
+		  
+		  
+		return x;  
+	  }
+	  
+  }
+  
+  
+  null_(x){
+	  
+	  if((x=='')||(x==null)||(x=='undefined')){
+		  
+		 return ''; 
+	  }else{
+		  
+		  
+		return x;  
+	  }
+	  
+  }
+  
+  
+  get_ExamScores(){
+	  
+	  if(this.exam==0){
+			this.presentPrompt(); 
+			return false;
+		 }
+		 if(this.term==0){
+			 this.presentPromptTerm(); 
+			return false;
+			 
+		 }
+		 
+	 for(var i=0; i<this.Teacher_Subject.length; i++){
+		 this.marksid[i]=this.Teacher_Subject[i].id; 
+		}
+	 
+		
+		this.Api.getExamScoreslink(this.marksid,
+	                         this.marks,
+							 this.term,
+							 this.exam,
+							 this.classId,
+							 this.streamId,
+							 this.subjectId,
+							 this.idMember,
+							 this.idProfile
+							 ).map(res => res.json())
+                              .subscribe(data => {
+								  console.log(data);
+		                       this.marks=data;
+		                     });
+	
+		
+	}
+	
+  
+  max100(c,i) {
+	  //c=parseInt(c);
+	  if(c>10){
+		
+		  
+		  this.marks[i]=this.marks2[i];
+		  //console.log(c);
+	  }else{
+		  
+		this.marks2[i]=c;
+		   //console.log(c);
+     
+	  }
+    //ToDo
+}
+  
+  openExam(connect,id){
+	  //$idSchool,$yrid,$classid,$stream,$term,$exam,$std
+	  //getExamResultsForStudent&x1=2&x2=2018&x3=17&x4=12&x5=1&x6=1&x7=1134
+	  //,year:2018,idSchool:idSchool,classid:classid,stream:stream,term:term,exam:exam,std:std
+	//console.log(id.length);
+	if(id.length==0){
+		let alert = this.alertCtrl.create({
+    title: 'No result yet',
+    
+    buttons: [
+      
+      {
+        text: 'Ok',
+        handler: data => {
+       // this.exam=data;
+		
+        }
+      }
+    ]
+  });
+  alert.present();
+		return false;
+	}else{
+	this.navCtrl.push(ExamPage,{title:connect,id:id,classid:this.Data.profile.classid});
+	}
+	
+//console.log(id);	
+	}
+	
+	callAttendance(x){
+		console.log(x);
+		this.Api.getTeacherSubjects(x.idSchool,x.classid,x.streamid)
+       .map(res => res.json())
+       .subscribe(data => {
+		//console.log(data);
+		//yearid,classid,stdid
+		 this.navCtrl.push(CallAttendPage,{student:data.students,classid:x.classid,idschool:x.idSchool,stream:x.streamid});
+	
+		});
+		
+	}
+	
+viewStudent(connect,id,details){ 
+//this.navCtrl.push(studentprofilePage,{id:this.Profile});
+	
+	   this.http.get(this.urltask+id)
+       .map(res => res.json())
+       .subscribe(data => {
+		console.log(data); 
+       
+		//this.title ='Profile';
+        //this.Profile = data.profile;
+		this.navCtrl.push(StudentPage,{title:connect,id:id,privelege:'teacher',idMember:this.idMember,details:details}); 
+		//this.navCtrl.push(StudentPage,{id:data.profile});
+		//this.member=this.Profile.parentdetail;
+		//this.name =connect;
+		 });
+		
+	  }
+	  
+	   
+	  
+	  
+	teachersubjectdiary(x){
+		
+		console.log(x);
+		let link =this.Api.ApiPath+"=getteacherdiary&x1="+this.idSchool+"&x2="+this.classId+"&x3="+this.streamId+"&x4="+x+"&x5="+this.idMember+"&x6="+this.subjectId;
+		this.http.get(link).map(res => res.json())
+                              .subscribe(data => {
+								  console.log(data);
+								  this.getTdiary=[];
+								   this.getTdiary=data;
+		                       this.marks=data;
+		                     });
+		
+	}
+	
+	
+	getstudentdiary(x){
+		
+		let link =this.Api.ApiPath+"=getstudentdiary&x1="+x+"&x2="+this.studentid;
+		console.log(link);
+		this.http.get(link).map(res => res.json())
+                              .subscribe(data => {
+								   this.getdiary=data;
+		  console.log(this.news);
+		                       this.marks=data;
+		                     });
+		
+	}
+	
+	
+	uploadUrl(x,y){
+	
+		 for(let i=0; i<this.Teacher_Subject.length; i++){
+		 this.marksid[i]=this.Teacher_Subject[i].id; 
+		}
+		let link =this.Api.ApiPath+"=study&x1="+this.idProfile+"&x3="+y+"&x2=&x4="+this.idMember+"&x5=&x6=";
+		
+		//let headers = new Headers({ 'Content-Type': 'multipart/form-data' });
+	this.imageURI
+    let body = new FormData();
+    body.append('post',x );
+    body.append('arr', y);
+	body.append('image',this.imageURI);
+	body.append('student', this.marksid);
+	body.append('priveleges',this.position);
+	body.append('idMember',this.idMember);
+	body.append('classid',this.classId);
+	body.append('streamid',this.streamId);
+	body.append('subjectid',this.subjectId);
+	this.imageURI="";
+    
+	
+	
+	
+       this.http.post(link, body)
+        .subscribe(data => {
+		   this.post ="";
+          // console.log(data);
+		  this.teachersubjectdiary(y)
+        }, error => {
+			 console.log(error);
+			 //this.post =error;
+            console.log("Oooops!");
+        });
+		
+	}
+	
+	
+	upload(x,y)
+  {
+	 	
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+    let options1: FileUploadOptions = {
+       fileKey: 'image',
+       fileName: 'name.jpg',
+       headers: {},
+	   params : {
+                "post": x,
+                "arr": y,
+                "student": this.studentid,
+                "priveleges": "teacher "+this.className+" "+this.streamName,
+                "idMember":this.idMember,
+                "classid": this.classId,
+				"streamid":this.streamId,
+				"subjectid":this.subjectId
+            }
+    
+    }
+ let loader = this.loadingCtrl.create({
+   content: "Uploading..."
+  });
+ loader.present();
+ console.log(this.imageURI);
+ if(this.imageURI){
+	 
+	console.log("Yes File"); 
+	
+fileTransfer.upload(this.imageURI,this.Api.ApiPath+"=postupdates&x1="+this.idProfile+"&x3="+y+"&x2=&x4="+this.idMember+"&x5=&x6=", options1)
+ .then((data) => {
+	 console.log(data);
+    this.post ="";
+	this.imageURI="";
+	this.imageFileName= false;
+    this.teachersubjectdiary(y);
+   loader.dismiss();
+ }, (err) => {
+	 console.log(err);
+   loader.dismiss();
+   
+ });
+ }else{
+	 
+	console.log("No File");
+
+		let link =this.Api.ApiPath+"=postupdates&x1="+this.idProfile+"&x3="+y+"&x2=&x4="+this.idMember+"&x5=&x6=";
+		
+		
+    let body = new FormData();
+	body.append('post',x );
+    body.append('arr', y);
+	body.append('image',this.studentid);
+	body.append('student', this.studentid);
+	body.append('priveleges',this.position);
+	body.append('idMember',this.idMember);
+	body.append('classid',this.classId);
+	body.append('streamid',this.streamId);
+	body.append('subjectid',this.subjectId);
+	this.imageURI="";
+	    
+	
+    
+	
+	
+	
+       this.http.post(link, body)
+        .subscribe(data => {
+		this.post ="";
+		this.getstudentdiary(this.panel);
+        loader.dismiss();
+		  
+        }, error => {
+			 console.log(error);
+			 loader.dismiss();
+            console.log("Oooops!");
+        });
+	
+	 
+ }
+ 
+
+
+}
+	
+	
+	
+	
+	 editPost(x,y) {
+	  
+	  let actionSheet = this.actionSheetCtrl.create({
+      title: '',
+      buttons: [
+        { icon :'ios-create-outline',
+          text: 'Edit Post',
+          handler: () => {
+			  console.log('Edit Post');
+			  console.log(y);
+			  console.log(x);
+			  this.presentProfileModal(x,y);
+            
+          }
+        },
+        { icon:'ios-trash-outline',
+          text: 'Delete',
+          handler: () => {
+			  console.log('Delete');
+			  console.log(y);
+			  console.log(x);
+		      this.deletepost(x,y);
+          }
+        },
+		{ 
+		
+		  icon:'ios-close-circle-outline',
+          text: 'Cancel',
+		  role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  
+	  
+	  
+  
+
+  
+}
+
+presentProfileModal(x,y) {
+	//console.log(x);
+   let profileModal = this.modalCtrl.create(EditModalPage, { post:y.name});
+   profileModal.onDidDismiss(data => {
+     console.log(data);
+	 if(data.role=='submit'){
+		 
+		this.editpost(x,y,data.post); 
+	 }
+	 
+   });
+   profileModal.present();
+ }
+	
+	
+ editpost(x,y,z){
+	 
+	 let link =this.Api.ApiPath+"=saveeditpost&x1=4";
+	 
+	 let body = new FormData();
+    body.append('post',z );
+    body.append('idpost', y.id);
+    this.post ='';
+	this.getdiary[x].name=z;
+	
+	
+       this.http.post(link, body)
+        .subscribe(data => {
+			
+        }, error => {
+			 console.log(error);
+			 //this.post =error;
+            console.log("Oooops!");
+        });
+		
+	 
+ }
+ deletepost(x,y){
+	 let link =this.Api.ApiPath+"=deletepost&x1="+y.id;
+	let body = new FormData();
+    body.append('post','edited' );
+    body.append('id', y.id);
+	
+	 this.http.post(link, body)
+        .subscribe(data => {
+        }, error => {
+			 console.log(error);
+			 //this.post =error;
+            console.log("Oooops!");
+        });
+	 
+	 
+	 
+	 
+		(this.getdiary).splice(x, 1);
+	 
+	 
+	 
+ }
+	
+	
+    opentComment(id){
+	this.navCtrl.push(CommentsPage,{id:id});	
+	}	
+	
+	
+	
+	
+	
+		uploadClassDiary(x,y)
+  {
+     for(let i=0; i<this.Teacher_Subject.length; i++){
+		// this.marksid=
+		 this.marksid[i]=this.Teacher_Subject[i].id; 
+		}
+		
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+    let options1: FileUploadOptions = {
+       fileKey: 'image',
+       fileName: 'name.jpg',
+       headers: {},
+	   params : {
+                "post": x,
+                "arr": y,
+                "student": this.marksid,
+                "priveleges": "teacher "+this.className+" "+this.streamName,
+                "idMember":this.idMember,
+                "classid": this.classId,
+				"streamid":this.streamId,
+				"subjectid":this.subjectId
+            }
+    
+    }
+ let loader = this.loadingCtrl.create({
+   content: "Uploading..."
+  });
+ loader.present();
+ 
+ 
+	
+   
+ console.log(this.imageURI);
+ if(this.imageURI){
+	 
+	console.log("Yes File"); 
+	
+fileTransfer.upload(this.imageURI,this.Api.ApiPath+"=study&x1="+this.idProfile+"&x3="+y+"&x2=&x4="+this.idMember+"&x5=&x6="+this.marksid, options1)
+ .then((data) => {
+	 console.log(data);
+    this.post ="";
+	this.imageURI="";
+	this.imageFileName= false;
+    this.teachersubjectdiary(y);
+   loader.dismiss();
+ }, (err) => {
+	 console.log(err);
+   loader.dismiss();
+   
+ });
+ }else{
+	 
+	console.log("No File");
+
+		 for(let i=0; i<this.Teacher_Subject.length; i++){
+		 this.marksid[i]=this.Teacher_Subject[i].id; 
+		}
+		let link =this.Api.ApiPath+"=study&x1="+this.idProfile+"&x3="+y+"&x2=&x4="+this.idMember+"&x5=&x6=";
+		
+		
+    let body = new FormData();
+    body.append('post',x );
+    body.append('arr', y);
+	body.append('image',this.imageURI);
+	body.append('student', this.marksid);
+	body.append('priveleges',this.position);
+	body.append('idMember',this.idMember);
+	body.append('classid',this.classId);
+	body.append('streamid',this.streamId);
+	body.append('subjectid',this.subjectId);
+	this.imageURI="";
+    
+	
+	
+	
+       this.http.post(link, body)
+        .subscribe(data => {
+		   this.post ="";
+        loader.dismiss();
+		  this.teachersubjectdiary(y)
+        }, error => {
+			 console.log(error);
+			 loader.dismiss();
+            console.log("Oooops!");
+        });
+	
+	 
+ }
+ 
+
+	
+  
+
+
+}
+	
+	
+
+	
+	
+	
+	
+	
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ManagerPage');
+  }
+
+}
